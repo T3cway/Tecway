@@ -1,5 +1,7 @@
 import BookCta from "@/components/BookCta";
 import CompareTable from "@/components/CompareTable";
+import { FAQSection } from "@/components/FAQSection";
+import Footer from "@/components/Fotter";
 import Hero from "@/components/Hero";
 import Process from "@/components/Process";
 import Results from "@/components/Results";
@@ -19,6 +21,7 @@ export default function Home() {
       <Results/>
       <Team/>
       <Work/>
+      <FAQSection/>
     </div>
   );
 }
