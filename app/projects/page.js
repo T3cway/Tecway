@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import WorkCard from "@/components/WorkCard";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ const categories = [
   { id: "setup", label: "Setup", value: "setup" },
 ];
 
-export default function ProjectsPage() {
+function ProjectsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const categoryParam = searchParams.get("category");
@@ -151,6 +151,18 @@ export default function ProjectsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ProjectsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-white/60">Loading projects...</div>
+      </div>
+    }>
+      <ProjectsContent />
+    </Suspense>
   );
 }
 
