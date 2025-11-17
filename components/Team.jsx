@@ -11,25 +11,29 @@ const Team = () => {
     {
       name: "Mohamed Mahmoud",
       role: "Product Manager & AI Specialist",
-      image: "/person-wearing-vr-headset-on-blue-background.jpg",
+      image: null, // Placeholder - add image later
+      gradient: "from-blue-600 to-purple-600",
       bio: "Leading product strategy and AI integration initiatives with 8+ years of experience in tech innovation.",
     },
     {
       name: "Ahmad Sapil",
       role: "Full-Stack Developer",
-      image: "/person-with-vr-headset-glowing-orange-light-effect.jpg",
+      image: null, // Placeholder - add image later
+      gradient: "from-orange-600 to-red-600",
       bio: "Building scalable web applications with modern technologies and a passion for clean code.",
     },
     {
       name: "Mohamed Ali",
       role: "Mobile Developer",
-      image: "/person-with-vr-headset-purple-orange-light-effects.jpg",
+      image: null, // Placeholder - add image later
+      gradient: "from-purple-600 to-pink-600",
       bio: "Crafting beautiful mobile experiences for iOS and Android with a focus on performance.",
     },
     {
       name: "Sofia Martin",
       role: "Project Manager",
-      image: "/person-with-vr-headset-orange-light-motion-blur.jpg",
+      image: null, // Placeholder - add image later
+      gradient: "from-orange-500 to-amber-600",
       bio: "Orchestrating cross-functional teams to deliver exceptional products on time and within scope.",
     },
   ];
@@ -55,12 +59,20 @@ const Team = () => {
               <div className="relative h-full flex flex-col aspect-[3/4]">
                 {/* Image container */}
                 <div className="absolute inset-0">
-                  <Image
-                    src={member.image || "/placeholder.svg"}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                  />
+                  {member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${member.gradient} flex items-center justify-center`}>
+                      <div className="text-white/20 text-4xl font-light">
+                        {member.name.split(' ').map(n => n[0]).join('')}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Info container that slides up over the image */}
