@@ -1,8 +1,19 @@
+"use client";
+
 import { BentoGrid } from "@/components/ui/bento-grid";
 import ChatBotPreview from "./ChatBotPreview";
 import { Globe, Smartphone, Settings, MessageSquare, Server } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Services = () => {
+  const router = useRouter();
+
+  const handleServiceClick = (item) => {
+    if (item.category) {
+      router.push(`/projects?category=${item.category}`);
+    }
+  };
+
   const serviceItems = [
     {
       title: "Web Applications",
@@ -12,6 +23,7 @@ const Services = () => {
       tags: ["React", "Next.js", "Full-Stack"],
       colSpan: 2,
       hasPersistentHover: true,
+      category: "web",
       preview: (
         <div className="relative bg-zinc-900/50 rounded-lg border border-white/10 h-48 flex items-center justify-center overflow-hidden group-hover:border-orange-500/30 transition-all duration-300">
           <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300"></div>
@@ -25,6 +37,7 @@ const Services = () => {
       icon: <Smartphone className="w-4 h-4 text-orange-500" />,
       status: "Available",
       tags: ["iOS", "Android", "React Native"],
+      category: "mobile",
       preview: (
         <div className="relative bg-zinc-900/50 rounded-lg border border-white/10 h-48 flex items-center justify-center overflow-hidden group-hover:border-orange-500/30 transition-all duration-300">
           <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300"></div>
@@ -38,6 +51,7 @@ const Services = () => {
       icon: <Settings className="w-4 h-4 text-orange-500" />,
       status: "Live",
       tags: ["Infrastructure", "Configuration", "Enterprise"],
+      category: "setup",
       preview: (
         <div className="relative bg-zinc-900/50 rounded-lg border border-white/10 h-48 flex items-center justify-center overflow-hidden group-hover:border-orange-500/30 transition-all duration-300">
           <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300"></div>
@@ -51,6 +65,7 @@ const Services = () => {
       icon: <MessageSquare className="w-4 h-4 text-orange-500" />,
       status: "Live",
       tags: ["AI", "Chat", "Support"],
+      category: "chatbot",
       preview: <ChatBotPreview />,
     },
     {
@@ -59,6 +74,7 @@ const Services = () => {
       icon: <Server className="w-4 h-4 text-orange-500" />,
       status: "Available",
       tags: ["Architecture", "Infrastructure", "Scalability"],
+      category: "infrastructure",
       preview: (
         <div className="relative bg-zinc-900/50 rounded-lg border border-white/10 h-48 flex items-center justify-center overflow-hidden group-hover:border-orange-500/30 transition-all duration-300">
           <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300"></div>
@@ -87,7 +103,7 @@ const Services = () => {
 
         {/* Services Bento Grid */}
         <section>
-          <BentoGrid items={serviceItems} />
+          <BentoGrid items={serviceItems} onClick={handleServiceClick} />
         </section>
       </main>
     </div>

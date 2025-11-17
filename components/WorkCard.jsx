@@ -1,10 +1,27 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
-const WorkCard = ({ title, date, image, featured = false, className }) => {
+const WorkCard = ({ title, date, image, featured = false, className, slug, onClick }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    } else if (slug) {
+      router.push(`/projects/${slug}`);
+    }
+  };
+
+  // Ensure image path starts with / for public folder images
+  const imageSrc = image ? (image.startsWith("/") ? image : `/${image}`) : null;
+
   return (
     <div
+      onClick={handleClick}
       className={cn(
         "group relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-500 hover:scale-[1.02]",
         featured ? "shadow-glow" : "shadow-card",
@@ -18,16 +35,16 @@ const WorkCard = ({ title, date, image, featured = false, className }) => {
           featured ? "bg-gradient-featured" : "bg-black"
         )}
       >
-        {image && !featured && (
+        {imageSrc && !featured && (
           <img
-            src={image}
+            src={imageSrc}
             alt={title}
             className="h-full w-full object-cover  opacity-80 "
           />
         )}
-        {image && featured && (
+        {imageSrc && featured && (
           <img
-            src={image}
+            src={imageSrc}
             alt={title}
             className="h-full w-full object-cover opacity-90"
           />

@@ -2,12 +2,13 @@
 
 import { cn } from "@/lib/utils";
 
-export function BentoGrid({ items = [] }) {
+export function BentoGrid({ items = [], onClick }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
       {items.map((item, index) => (
         <div
           key={index}
+          onClick={() => onClick && onClick(item)}
           className={cn(
             "group relative p-6 rounded-xl overflow-hidden transition-all duration-300",
             "border border-white/10 bg-[#0C0C0D]",
@@ -16,6 +17,7 @@ export function BentoGrid({ items = [] }) {
             "hover:-translate-y-0.5 will-change-transform",
             "flex flex-col",
             item.colSpan === 2 ? "md:col-span-2" : "col-span-1",
+            onClick && "cursor-pointer",
             {
               "shadow-[0_2px_12px_rgba(251,146,60,0.1)] -translate-y-0.5 border-orange-500/40":
                 item.hasPersistentHover,
