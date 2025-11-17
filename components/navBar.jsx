@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, Headphones, X } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +20,17 @@ const NavBar = () => {
       <header className="relative z-50 px-6 py-6 border-b border-white/20">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xl font-semibold text-white">Tecway</span>
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/Tecway.png"
+                alt="Tecway Logo"
+                width={40}
+                height={40}
+                className="h-10 w-10"
+                priority
+              />
+              <span className="text-xl font-semibold text-white">Tecway</span>
+            </Link>
           </div>
 
           <div className="flex items-center gap-4 relative z-50">

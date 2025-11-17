@@ -16,6 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Tecway ",
   description: "Software agency ",
+  icons: {
+    icon: "/Tecway.png",
+    shortcut: "/Tecway.png",
+    apple: "/Tecway.png",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -23,6 +28,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
         <NavBar />
 

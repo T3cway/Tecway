@@ -15,6 +15,8 @@ const ContactPage = () => {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
 
   const handleChange = (e) => {
     setFormData({
@@ -23,12 +25,41 @@ const ContactPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    // You can add your form submission logic here
-    alert("Thank you for your message! We'll get back to you soon.");
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message");
+      }
+
+      setSubmitStatus("success");
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -194,11 +225,30 @@ const ContactPage = () => {
 
                   <Button
                     type="submit"
-                    className="bg-orange-600 hover:bg-orange-500 cursor-pointer text-white px-8 py-6 text-base font-medium rounded-xl w-full group"
+                    disabled={isSubmitting}
+                    className="bg-orange-600 hover:bg-orange-500 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-white px-8 py-6 text-base font-medium rounded-xl w-full group"
                   >
-                    <Send className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" />
-                    Send Message
+                    {isSubmitting ? (
+                      "Sending..."
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
+
+                  {submitStatus === "success" && (
+                    <div className="mt-4 p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm">
+                      Thank you for your message! We'll get back to you soon.
+                    </div>
+                  )}
+
+                  {submitStatus === "error" && (
+                    <div className="mt-4 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm">
+                      Something went wrong. Please try again later.
+                    </div>
+                  )}
                 </form>
               </Card>
             </div>
