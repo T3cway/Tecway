@@ -41,7 +41,9 @@ const Footer = () => {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/company/t3cway"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white hover:text-gray-300 transition-colors"
                   aria-label="LinkedIn"
                 >
@@ -69,12 +71,12 @@ const Footer = () => {
                 >
                   Home
                 </Link>
-                <a
-                  href="#"
+                <Link
+                  href="/projects"
                   className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                 >
                   work
-                </a>
+                </Link>
                 <Link
                   href="/contact"
                   className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"

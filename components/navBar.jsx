@@ -35,8 +35,8 @@ const NavBar = () => {
 
   const menuItems = [
     { label: "Home", href: "/" },
-    { label: "Our Work", href: "#services" },
-    { label: "Book A Call", href: "#solutions" },
+    { label: "Our Work", href: "/projects" },
+    { label: "Book A Call", href: "/#book-call" },
     { label: "Contact", href: "/contact" },
   ];
 

@@ -10,7 +10,7 @@ const BookCta = () => {
   const CALENDLY_URL = "https://calendly.com/mohammedaliedriis/project-discussion";
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div id="book-call" className="min-h-screen bg-black relative overflow-hidden">
       {/* Gradient background effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-orange-600/40 via-transparent to-transparent blur-3xl" />
       <div className="absolute left-0 top-0 bottom-0 w-1/3 bg-gradient-to-r from-orange-500/30 to-transparent blur-[100px]" />
