@@ -123,3 +123,138 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Calendly Orange Theme Customization */
+.calendly-inline-widget {
+  background: transparent !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 600px !important;
+}
+
+.calendly-inline-widget iframe {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 600px !important;
+  border: none !important;
+}
+
+/* Override Calendly's default blue colors with orange */
+.calendly-inline-widget .calendly-popup-content,
+.calendly-inline-widget .calendly-popup-content * {
+  --calendly-primary-color: #ea580c !important; /* orange-600 */
+  --calendly-primary-color-hover: #f97316 !important; /* orange-500 */
+}
+
+/* Style Calendly buttons and links */
+.calendly-inline-widget button[type="submit"],
+.calendly-inline-widget .calendly-popup-content button,
+.calendly-inline-widget a.calendly-link {
+  background-color: #ea580c !important;
+  border-color: #ea580c !important;
+  color: white !important;
+}
+
+.calendly-inline-widget button[type="submit"]:hover,
+.calendly-inline-widget .calendly-popup-content button:hover,
+.calendly-inline-widget a.calendly-link:hover {
+  background-color: #f97316 !important;
+  border-color: #f97316 !important;
+}
+
+/* Style selected time slots */
+.calendly-inline-widget .calendly-event-time-selected,
+.calendly-inline-widget .calendly-event-time-selected * {
+  background-color: #ea580c !important;
+  border-color: #ea580c !important;
+}
+
+/* Style calendar navigation buttons */
+.calendly-inline-widget .calendly-calendar-nav-button,
+.calendly-inline-widget .calendly-calendar-nav-button:hover {
+  color: #ea580c !important;
+}
+
+/* Style form inputs focus */
+.calendly-inline-widget input:focus,
+.calendly-inline-widget textarea:focus,
+.calendly-inline-widget select:focus {
+  border-color: #ea580c !important;
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1) !important;
+}
+
+/* Style checkboxes and radio buttons */
+.calendly-inline-widget input[type="checkbox"]:checked,
+.calendly-inline-widget input[type="radio"]:checked {
+  background-color: #ea580c !important;
+  border-color: #ea580c !important;
+}
+
+/* Animated Shader Hero Animations */
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
+
+.animation-delay-800 {
+  animation-delay: 0.8s;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}

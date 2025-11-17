@@ -1,29 +1,21 @@
+"use client";
+
 import WorkCard from "@/components/WorkCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { getAllProjects } from "@/lib/projects";
+import { useRouter } from "next/navigation";
 
 const Work = () => {
-  const works = [
-    {
-      id: 1,
-      title: "Shaheen AI",
-      date: "Jan 25, 2025",
-      featured: true,
-      image: "retro.png",
-    },
-    {
-      id: 2,
-      title: "Why AI Agencies Need High-Converting Websites",
-      date: "Jan 6, 2025",
-      image: "microchip.png",
-    },
-    {
-      id: 3,
-      title: "Trust in AI: What SaaS Brands Teach Us",
-      date: "Jan 1, 2025",
-      image: "modern-setup.png",
-    },
-  ];
+  const router = useRouter();
+  const projects = getAllProjects();
+  const featuredProject = projects.find((p) => p.featured) || projects[0];
+  const otherProjects = projects.filter((p) => p.id !== featuredProject.id).slice(0, 2);
+
+  const handleAllClick = () => {
+    router.push("/projects");
+  };
+
   return (
     <div className="min-h-screen bg-black">
       {/* Ambient Glow */}
@@ -36,6 +28,7 @@ const Work = () => {
             Our Work
           </h1>
           <Button
+            onClick={handleAllClick}
             variant="default"
             size="lg"
             className="bg-orange-500 cursor-pointer hover:bg-orange-600 text-white px-6 py-5 text-base font-normal rounded-lg"
@@ -50,22 +43,24 @@ const Work = () => {
           {/* Featured Work - Left Column */}
           <div className="lg:row-span-2">
             <WorkCard
-              title={works[0].title}
-              date={works[0].date}
-              image={works[0].image}
-              featured={works[0].featured}
+              title={featuredProject.title}
+              date={featuredProject.date}
+              image={featuredProject.images?.[0] || featuredProject.image}
+              featured={featuredProject.featured}
+              slug={featuredProject.slug}
               className="h-full"
             />
           </div>
 
           {/* Regular Work Items - Right Column */}
           <div className="grid gap-6">
-            {works.slice(1).map((work) => (
+            {otherProjects.map((project) => (
               <WorkCard
-                key={work.id}
-                title={work.title}
-                date={work.date}
-                image={work.image}
+                key={project.id}
+                title={project.title}
+                date={project.date}
+                image={project.images?.[0] || project.image}
+                slug={project.slug}
               />
             ))}
           </div>

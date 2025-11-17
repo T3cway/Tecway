@@ -1,23 +1,50 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Menu, Headphones, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > 100) {
+        // Hide navbar when scrolling down, show when scrolling up
+        if (currentScrollY > lastScrollY) {
+          setIsScrolled(true);
+        } else {
+          setIsScrolled(false);
+        }
+      } else {
+        // Always show navbar at the top
+        setIsScrolled(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const menuItems = [
     { label: "Home", href: "/" },
-    { label: "Our Work", href: "#services" },
-    { label: "Book A Call", href: "#solutions" },
+    { label: "Our Work", href: "/projects" },
+    { label: "Book A Call", href: "/#book-call" },
     { label: "Contact", href: "/contact" },
   ];
 
   return (
     <>
-      <header className="relative z-50 px-6 py-6 border-b border-white/20">
+      <header className={`fixed top-0 left-0 right-0 z-50 px-6 py-6 bg-transparent transition-transform duration-300 ${
+        isScrolled ? '-translate-y-full' : 'translate-y-0'
+      }`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
