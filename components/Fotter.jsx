@@ -18,7 +18,7 @@ const Footer = () => {
                 >
                   <path d="M3 3l8 8-8 8V3zm10 0l8 8-8 8V3z" />
                 </svg>
-                <span className="text-lg sm:text-xl font-semibold text-white">
+                <span className="text-lg sm:text-xl font-semibold text-white font-bitcount">
                   Tecway
                 </span>
               </div>
@@ -112,14 +112,14 @@ const Footer = () => {
 
       {/* Large background text */}
       <div className="relative z-10 w-full flex items-center justify-center pointer-events-none -mt-8 sm:-mt-12 md:-mt-16">
-        <h1 className="text-[6rem] sm:text-[10rem] md:text-[16rem] lg:text-[20rem] font-bold text-[#a0826d] opacity-40 select-none leading-none">
+        <h1 className="text-[6rem] sm:text-[10rem] md:text-[16rem] lg:text-[20rem] font-bold text-[#a0826d] opacity-40 select-none leading-none font-bitcount">
           Tecway
         </h1>
       </div>
 
       {/* Copyright */}
       <div className="relative z-10 w-full flex justify-center px-4 sm:px-6 md:px-8 mt-4 sm:mt-6 md:mt-0">
-        <p className="text-white text-xs sm:text-sm">© 2025, Tecway.</p>
+        <p className="text-white text-xs sm:text-sm">© 2025, <span className="font-bitcount">Tecway</span>.</p>
       </div>
     </footer>
   );
