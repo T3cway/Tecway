@@ -13,7 +13,6 @@ const NavBar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       if (currentScrollY > 100) {
         // Hide navbar when scrolling down, show when scrolling up
         if (currentScrollY > lastScrollY) {
@@ -37,7 +36,6 @@ const NavBar = () => {
     { label: "Home", href: "/" },
     { label: "Our Work", href: "/projects" },
     { label: "Book A Call", href: "/#book-call" },
-    { label: "FAQs", href: "/#faqs" },
     { label: "Contact", href: "/contact" },
   ];
 
@@ -92,7 +90,7 @@ const NavBar = () => {
                 className="h-6 w-6"
                 priority
               />
-              <span className="text-xl font-semibold text-white font-bitcount">Tecway</span>
+              <span className="text-xl font-semibold text-white">Tecway</span>
             </Link>
           </div>
 

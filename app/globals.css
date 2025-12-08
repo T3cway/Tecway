@@ -3,9 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Font Face Declarations - Removed duplicate declarations as fonts are now loaded via next/font/local */
-/* This prevents double loading and improves performance */
-
 body {
   background-color: black;
   color: white;
@@ -127,17 +124,6 @@ body {
   }
 }
 
-/* Custom Font Classes */
-.font-bitcount {
-  font-family: 'Bitcount Prop Single', var(--font-bitcount-prop-single), sans-serif;
-}
-
-.font-monsieur {
-  font-family: 'Imperial Script', cursive, serif;
-  font-weight: bold;
-  font-style: bold;
-}
-
 /* Calendly Orange Theme Customization */
 .calendly-inline-widget {
   background: transparent !important;
@@ -252,10 +238,54 @@ body {
   animation-delay: 0.8s;
 }
 
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Hero Headline Animations */
+@keyframes headline-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes headline-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-headline-slide-up {
+  animation: headline-slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.headline-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.headline-delay-300 {
+  animation-delay: 0.3s;
 }
 
 .animate-gradient {
@@ -265,10 +295,47 @@ body {
 
 /* Hide scrollbar for horizontal scroll */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Liquid glass navbar effect */
+.liquid-glass-nav {
+  position: relative;
+  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  isolation: isolate;
+  background: rgba(255, 255, 255, 0.075);
+  box-shadow: 0px 6px 21px -8px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.liquid-glass-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 999px;
+  box-shadow: inset 0 0 12px -4px rgba(246, 97, 11, 0.3);
+  background-color: rgba(255, 255, 255, 0.027);
+  pointer-events: none;
+}
+
+.liquid-glass-nav::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 9999px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  filter: url(#glass-distortion);
+  -webkit-filter: url(#glass-distortion);
+  isolation: isolate;
+  pointer-events: none;
 }

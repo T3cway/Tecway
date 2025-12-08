@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 
 // Reusable Shader Background Hook
 const useShaderBackground = () => {
@@ -14,7 +14,7 @@ const useShaderBackground = () => {
     constructor(canvas, scale) {
       this.canvas = canvas;
       this.scale = scale;
-      this.gl = canvas.getContext('webgl2');
+      this.gl = canvas.getContext("webgl2");
       this.gl.viewport(0, 0, canvas.width * scale, canvas.height * scale);
       this.shaderSource = defaultShaderSource;
       this.program = null;
@@ -57,7 +57,12 @@ void main(){gl_Position=position;}`;
 
     updateScale(scale) {
       this.scale = scale;
-      this.gl.viewport(0, 0, this.canvas.width * scale, this.canvas.height * scale);
+      this.gl.viewport(
+        0,
+        0,
+        this.canvas.width * scale,
+        this.canvas.height * scale
+      );
     }
 
     compile(shader, source) {
@@ -66,7 +71,7 @@ void main(){gl_Position=position;}`;
       gl.compileShader(shader);
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
         const error = gl.getShaderInfoLog(shader);
-        console.error('Shader compilation error:', error);
+        console.error("Shader compilation error:", error);
       }
     }
 
@@ -85,7 +90,10 @@ void main(){gl_Position=position;}`;
 
     reset() {
       const gl = this.gl;
-      if (this.program && !gl.getProgramParameter(this.program, gl.DELETE_STATUS)) {
+      if (
+        this.program &&
+        !gl.getProgramParameter(this.program, gl.DELETE_STATUS)
+      ) {
         if (this.vs) {
           gl.detachShader(this.program, this.vs);
           gl.deleteShader(this.vs);
@@ -116,31 +124,35 @@ void main(){gl_Position=position;}`;
     init() {
       const gl = this.gl;
       const program = this.program;
-      
+
       this.buffer = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
-      const position = gl.getAttribLocation(program, 'position');
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array(this.vertices),
+        gl.STATIC_DRAW
+      );
+      const position = gl.getAttribLocation(program, "position");
       gl.enableVertexAttribArray(position);
       gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-      program.resolution = gl.getUniformLocation(program, 'resolution');
-      program.time = gl.getUniformLocation(program, 'time');
-      program.move = gl.getUniformLocation(program, 'move');
-      program.touch = gl.getUniformLocation(program, 'touch');
-      program.pointerCount = gl.getUniformLocation(program, 'pointerCount');
-      program.pointers = gl.getUniformLocation(program, 'pointers');
+      program.resolution = gl.getUniformLocation(program, "resolution");
+      program.time = gl.getUniformLocation(program, "time");
+      program.move = gl.getUniformLocation(program, "move");
+      program.touch = gl.getUniformLocation(program, "touch");
+      program.pointerCount = gl.getUniformLocation(program, "pointerCount");
+      program.pointers = gl.getUniformLocation(program, "pointers");
     }
 
     render(now = 0) {
       const gl = this.gl;
       const program = this.program;
-      
+
       if (!program || gl.getProgramParameter(program, gl.DELETE_STATUS)) return;
       gl.clearColor(0, 0, 0, 1);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.useProgram(program);
       gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-      
+
       gl.uniform2f(program.resolution, this.canvas.width, this.canvas.height);
       gl.uniform1f(program.time, now * 1e-3);
       gl.uniform2f(program.move, ...this.mouseMove);
@@ -159,35 +171,43 @@ void main(){gl_Position=position;}`;
       this.pointers = new Map();
       this.lastCoords = [0, 0];
       this.moves = [0, 0];
-      
-      const map = (element, scale, x, y) => 
-        [x * scale, element.height - y * scale];
-      
-      element.addEventListener('pointerdown', (e) => {
+
+      const map = (element, scale, x, y) => [
+        x * scale,
+        element.height - y * scale,
+      ];
+
+      element.addEventListener("pointerdown", (e) => {
         this.active = true;
-        this.pointers.set(e.pointerId, map(element, this.getScale(), e.clientX, e.clientY));
+        this.pointers.set(
+          e.pointerId,
+          map(element, this.getScale(), e.clientX, e.clientY)
+        );
       });
-      
-      element.addEventListener('pointerup', (e) => {
+
+      element.addEventListener("pointerup", (e) => {
         if (this.count === 1) {
           this.lastCoords = this.first;
         }
         this.pointers.delete(e.pointerId);
         this.active = this.pointers.size > 0;
       });
-      
-      element.addEventListener('pointerleave', (e) => {
+
+      element.addEventListener("pointerleave", (e) => {
         if (this.count === 1) {
           this.lastCoords = this.first;
         }
         this.pointers.delete(e.pointerId);
         this.active = this.pointers.size > 0;
       });
-      
-      element.addEventListener('pointermove', (e) => {
+
+      element.addEventListener("pointermove", (e) => {
         if (!this.active) return;
         this.lastCoords = [e.clientX, e.clientY];
-        this.pointers.set(e.pointerId, map(element, this.getScale(), e.clientX, e.clientY));
+        this.pointers.set(
+          e.pointerId,
+          map(element, this.getScale(), e.clientX, e.clientY)
+        );
         this.moves = [this.moves[0] + e.movementX, this.moves[1] + e.movementY];
       });
     }
@@ -209,8 +229,8 @@ void main(){gl_Position=position;}`;
     }
 
     get coords() {
-      return this.pointers.size > 0 
-        ? Array.from(this.pointers.values()).flat() 
+      return this.pointers.size > 0
+        ? Array.from(this.pointers.values()).flat()
         : [0, 0];
     }
 
@@ -221,75 +241,53 @@ void main(){gl_Position=position;}`;
 
   const resize = () => {
     if (!canvasRef.current) return;
-    
+
     const canvas = canvasRef.current;
     // Reduced DPR for better performance (0.5 instead of 0.5 * devicePixelRatio)
     const dpr = Math.max(1, Math.min(1.5, window.devicePixelRatio * 0.5));
-    
+
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
-    
+
     if (rendererRef.current) {
       rendererRef.current.updateScale(dpr);
     }
   };
 
+  const loop = (now) => {
+    if (!rendererRef.current || !pointersRef.current) return;
+
+    rendererRef.current.updateMouse(pointersRef.current.first);
+    rendererRef.current.updatePointerCount(pointersRef.current.count);
+    rendererRef.current.updatePointerCoords(pointersRef.current.coords);
+    rendererRef.current.updateMove(pointersRef.current.move);
+    rendererRef.current.render(now);
+    animationFrameRef.current = requestAnimationFrame(loop);
+  };
+
   useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
-    // Reduced DPR for better performance
-    const dpr = Math.max(1, Math.min(1.5, window.devicePixelRatio * 0.5));
-    
+    const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+
     rendererRef.current = new WebGLRenderer(canvas, dpr);
     pointersRef.current = new PointerHandler(canvas, dpr);
-    
+
     rendererRef.current.setup();
     rendererRef.current.init();
-    
+
     resize();
-    
+
     if (rendererRef.current.test(defaultShaderSource) === null) {
       rendererRef.current.updateShader(defaultShaderSource);
     }
-    
-    let isVisible = true;
-    let lastFrameTime = 0;
-    const targetFPS = 30; // Reduced from 60fps to 30fps for better performance
-    const frameInterval = 1000 / targetFPS;
-    
-    // Throttled loop for better performance
-    const throttledLoop = (now) => {
-      if (!isVisible) {
-        animationFrameRef.current = requestAnimationFrame(throttledLoop);
-        return;
-      }
-      
-      const elapsed = now - lastFrameTime;
-      if (elapsed >= frameInterval) {
-        if (rendererRef.current && pointersRef.current) {
-          rendererRef.current.updateMouse(pointersRef.current.first);
-          rendererRef.current.updatePointerCount(pointersRef.current.count);
-          rendererRef.current.updatePointerCoords(pointersRef.current.coords);
-          rendererRef.current.updateMove(pointersRef.current.move);
-          rendererRef.current.render(now);
-        }
-        lastFrameTime = now - (elapsed % frameInterval);
-      }
-      animationFrameRef.current = requestAnimationFrame(throttledLoop);
-    };
-    
-    // Handle visibility change to pause animation when tab is hidden
-    const handleVisibilityChange = () => {
-      isVisible = !document.hidden;
-    };
-    
-    throttledLoop(0);
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('resize', resize);
-    
+
+    loop(0);
+
+    window.addEventListener("resize", resize);
+
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
@@ -303,23 +301,19 @@ void main(){gl_Position=position;}`;
 };
 
 // Reusable Hero Component
-const Hero = ({
-  trustBadge,
-  headline,
-  subtitle,
-  buttons,
-  className = ""
-}) => {
+const Hero = ({ trustBadge, headline, subtitle, buttons, className = "" }) => {
   const canvasRef = useShaderBackground();
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden bg-black ${className}`}>
+    <div
+      className={`relative w-full h-screen overflow-hidden bg-black ${className}`}
+    >
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full object-contain touch-none"
-        style={{ background: 'black' }}
+        style={{ background: "black" }}
       />
-      
+
       {/* Hero Content Overlay */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white">
         {/* Trust Badge */}
@@ -329,7 +323,10 @@ const Hero = ({
               {trustBadge.icons && (
                 <div className="flex">
                   {trustBadge.icons.map((icon, index) => (
-                    <span key={index} className={`text-${index === 0 ? 'yellow' : index === 1 ? 'orange' : 'amber'}-300`}>
+                    <span
+                      key={index}
+                      className={`text-${index === 0 ? "yellow" : index === 1 ? "orange" : "amber"}-300`}
+                    >
                       {icon}
                     </span>
                   ))}
@@ -344,35 +341,25 @@ const Hero = ({
           {/* Main Heading with Animation */}
           <div className="space-y-2">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent animate-fade-in-up animation-delay-200">
-              {headline.line1.split(' ').map((word, index, arr) => {
-                if (word.toLowerCase() === 'fuel') {
-                  return <span key={index} className="font-monsieur text-6xl md:text-8xl lg:text-9xl">{word}{index < arr.length - 1 ? ' ' : ''}</span>;
-                }
-                return <span key={index}>{word}{index < arr.length - 1 ? ' ' : ''}</span>;
-              })}
+              {headline.line1}
             </h1>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 bg-clip-text text-transparent animate-fade-in-up animation-delay-400">
-              {headline.line2.split(' ').map((word, index, arr) => {
-                if (word.toLowerCase().includes('technology')) {
-                  return <span key={index} className="font-monsieur">{word}{index < arr.length - 1 ? ' ' : ''}</span>;
-                }
-                return <span key={index}>{word}{index < arr.length - 1 ? ' ' : ''}</span>;
-              })}
+              {headline.line2}
             </h1>
           </div>
-          
+
           {/* Subtitle with Animation */}
           <div className="max-w-3xl mx-auto animate-fade-in-up animation-delay-600">
             <p className="text-lg md:text-xl lg:text-2xl text-orange-100/90 font-light leading-relaxed">
               {subtitle}
             </p>
           </div>
-          
+
           {/* CTA Buttons with Animation */}
           {buttons && (
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10 animate-fade-in-up animation-delay-800">
               {buttons.primary && (
-                <button 
+                <button
                   onClick={buttons.primary.onClick}
                   className="px-8 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-black rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/25"
                 >
@@ -380,7 +367,7 @@ const Hero = ({
                 </button>
               )}
               {buttons.secondary && (
-                <button 
+                <button
                   onClick={buttons.secondary.onClick}
                   className="px-8 py-4 bg-orange-500/10 hover:bg-orange-500/20 border border-orange-300/30 hover:border-orange-300/50 text-orange-100 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm"
                 >
@@ -465,4 +452,3 @@ void main(void) {
 }`;
 
 export default Hero;
-

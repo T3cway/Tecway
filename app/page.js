@@ -1,7 +1,6 @@
-import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import Footer from "@/components/Fotter";
 import { getFAQPageSchema } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://tecway.dev";
@@ -123,6 +122,9 @@ export const metadata = {
   },
 };
 
+// Generate FAQ schema for SEO
+const faqSchema = getFAQPageSchema(faqs);
+
 // Lazy load below-the-fold components for better performance
 const Services = dynamic(() => import("@/components/Services"), {
   loading: () => <div className="min-h-screen bg-black" />,
@@ -153,8 +155,6 @@ const FAQSection = dynamic(() => import("@/components/FAQSection"), {
 });
 
 export default function Home() {
-  const faqSchema = getFAQPageSchema(faqs);
-
   return (
     <>
       <script
