@@ -28,6 +28,10 @@ const Work = dynamic(() => import("@/components/Work"), {
   loading: () => <div className="min-h-screen bg-black" />,
 });
 
+const FAQSection = dynamic(() => import("@/components/FAQSection"), {
+  loading: () => <div className="min-h-screen bg-black" />,
+});
+
 export default function Home() {
   return (
     <div>
@@ -49,6 +53,9 @@ export default function Home() {
       </Suspense>
       <Suspense fallback={<div className="min-h-screen bg-black" />}>
         <Work />
+      </Suspense>
+      <Suspense fallback={<div className="min-h-screen bg-black" />}>
+        <FAQSection/>
       </Suspense>
     </div>
   );

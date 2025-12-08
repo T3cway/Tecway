@@ -3,22 +3,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Font Face Declarations */
-@font-face {
-  font-family: 'Bitcount Prop Single';
-  src: url('/Bitcount_Prop_Single/static/BitcountPropSingle-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Imperial Script';
-  src: url('/Imperial_Script/ImperialScript-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+/* Font Face Declarations - Removed duplicate declarations as fonts are now loaded via next/font/local */
+/* This prevents double loading and improves performance */
 
 body {
   background-color: black;

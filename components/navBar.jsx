@@ -37,6 +37,7 @@ const NavBar = () => {
     { label: "Home", href: "/" },
     { label: "Our Work", href: "/projects" },
     { label: "Book A Call", href: "/#book-call" },
+    { label: "FAQs", href: "/#faqs" },
     { label: "Contact", href: "/contact" },
   ];
 
