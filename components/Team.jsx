@@ -67,9 +67,14 @@ const Team = () => {
                       className="object-cover"
                     />
                   ) : (
-                    <div className={`w-full h-full bg-gradient-to-br ${member.gradient} flex items-center justify-center`}>
+                    <div
+                      className={`w-full h-full bg-gradient-to-br ${member.gradient} flex items-center justify-center`}
+                    >
                       <div className="text-white/20 text-4xl font-light">
-                        {member.name.split(' ').map(n => n[0]).join('')}
+                        {member.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
                       </div>
                     </div>
                   )}

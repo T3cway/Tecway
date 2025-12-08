@@ -5,7 +5,15 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
-const WorkCard = ({ title, date, image, featured = false, className, slug, onClick }) => {
+const WorkCard = ({
+  title,
+  date,
+  image,
+  featured = false,
+  className,
+  slug,
+  onClick,
+}) => {
   const router = useRouter();
 
   const handleClick = () => {

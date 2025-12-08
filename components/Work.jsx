@@ -10,12 +10,13 @@ const Work = () => {
   const router = useRouter();
   const projects = getAllProjects();
   const featuredProject = projects.find((p) => p.featured) || projects[0];
-  const otherProjects = projects.filter((p) => p.id !== featuredProject.id).slice(0, 2);
+  const otherProjects = projects
+    .filter((p) => p.id !== featuredProject.id)
+    .slice(0, 2);
 
   const handleAllClick = () => {
     router.push("/projects");
   };
-
   return (
     <div className="min-h-screen bg-black">
       {/* Ambient Glow */}

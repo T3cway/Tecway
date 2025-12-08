@@ -8,7 +8,6 @@ const Footer = () => {
       <div className="relative z-10 w-full px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12 max-sm:flex  max-sm:items-center max-sm:justify-center">
-
             {/* Left column - Brand */}
             <div className="space-y-4 sm:space-y-5 md:space-y-6">
               <div className="flex items-center gap-2">
@@ -107,7 +106,6 @@ const Footer = () => {
                 </a>
               </nav>
             </div>
-
           </div>
         </div>
       </div>

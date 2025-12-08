@@ -7,10 +7,14 @@ import CalendlyModal from "./CalendlyModal";
 
 const BookCta = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const CALENDLY_URL = "https://calendly.com/mohammedaliedriis/project-discussion";
+  const CALENDLY_URL =
+    "https://calendly.com/mohammedaliedriis/project-discussion";
 
   return (
-    <div id="book-call" className="min-h-screen bg-black relative overflow-hidden">
+    <div
+      id="book-call"
+      className="min-h-screen bg-black relative overflow-hidden"
+    >
       {/* Gradient background effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-orange-600/40 via-transparent to-transparent blur-3xl" />
       <div className="absolute left-0 top-0 bottom-0 w-1/3 bg-gradient-to-r from-orange-500/30 to-transparent blur-[100px]" />
@@ -38,7 +42,7 @@ const BookCta = () => {
                   Book A Call
                 </h2>
                 <div className="flex justify-center">
-                  <Button 
+                  <Button
                     onClick={() => setIsModalOpen(true)}
                     className="bg-orange-500 cursor-pointer hover:bg-orange-600 text-white px-6 py-5 text-base font-normal rounded-lg"
                   >
@@ -114,9 +118,9 @@ const BookCta = () => {
         </div>
       </div>
 
-      <CalendlyModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+      <CalendlyModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
         url={CALENDLY_URL}
       />
     </div>

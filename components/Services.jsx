@@ -2,7 +2,13 @@
 
 import { BentoGrid } from "@/components/ui/bento-grid";
 import ChatBotPreview from "./ChatBotPreview";
-import { Globe, Smartphone, Settings, MessageSquare, Server } from "lucide-react";
+import {
+  Globe,
+  Smartphone,
+  Settings,
+  MessageSquare,
+  Server,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const Services = () => {
@@ -17,7 +23,8 @@ const Services = () => {
   const serviceItems = [
     {
       title: "Web Applications",
-      description: "Build robust, scalable, and user-friendly web apps tailored to your business needs. From MVPs to full-scale platforms.",
+      description:
+        "Build robust, scalable, and user-friendly web apps tailored to your business needs. From MVPs to full-scale platforms.",
       icon: <Globe className="w-4 h-4 text-orange-500" />,
       status: "Available",
       tags: ["React", "Next.js", "Full-Stack"],
@@ -27,13 +34,16 @@ const Services = () => {
       preview: (
         <div className="relative bg-zinc-900/50 rounded-lg border border-white/10 h-48 flex items-center justify-center overflow-hidden group-hover:border-orange-500/30 transition-all duration-300">
           <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300"></div>
-          <div className="text-white/40 text-sm font-medium relative z-10">Web App Preview</div>
+          <div className="text-white/40 text-sm font-medium relative z-10">
+            Web App Preview
+          </div>
         </div>
       ),
     },
     {
       title: "Mobile Applications",
-      description: "Bring your ideas to life with powerful mobile apps. We design and develop scalable iOS and Android applications.",
+      description:
+        "Bring your ideas to life with powerful mobile apps. We design and develop scalable iOS and Android applications.",
       icon: <Smartphone className="w-4 h-4 text-orange-500" />,
       status: "Available",
       tags: ["iOS", "Android", "React Native"],
@@ -41,13 +51,16 @@ const Services = () => {
       preview: (
         <div className="relative bg-zinc-900/50 rounded-lg border border-white/10 h-48 flex items-center justify-center overflow-hidden group-hover:border-orange-500/30 transition-all duration-300">
           <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300"></div>
-          <div className="text-white/40 text-sm font-medium relative z-10">Mobile App Preview</div>
+          <div className="text-white/40 text-sm font-medium relative z-10">
+            Mobile App Preview
+          </div>
         </div>
       ),
     },
     {
       title: "Aramco CCC Setup",
-      description: "Complete setup and configuration for Aramco CCC infrastructure, ensuring optimal performance and reliability.",
+      description:
+        "Complete setup and configuration for Aramco CCC infrastructure, ensuring optimal performance and reliability.",
       icon: <Settings className="w-4 h-4 text-orange-500" />,
       status: "Live",
       tags: ["Infrastructure", "Configuration", "Enterprise"],
@@ -55,13 +68,16 @@ const Services = () => {
       preview: (
         <div className="relative bg-zinc-900/50 rounded-lg border border-white/10 h-48 flex items-center justify-center overflow-hidden group-hover:border-orange-500/30 transition-all duration-300">
           <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300"></div>
-          <div className="text-white/40 text-sm font-medium relative z-10">Aramco CCC Setup Preview</div>
+          <div className="text-white/40 text-sm font-medium relative z-10">
+            Aramco CCC Setup Preview
+          </div>
         </div>
       ),
     },
     {
       title: "Chatbot Development",
-      description: "We build custom AI chat solutions for instant support, streamlined processes, and a seamless audience experience.",
+      description:
+        "We build custom AI chat solutions for instant support, streamlined processes, and a seamless audience experience.",
       icon: <MessageSquare className="w-4 h-4 text-orange-500" />,
       status: "Live",
       tags: ["AI", "Chat", "Support"],
@@ -70,7 +86,8 @@ const Services = () => {
     },
     {
       title: "System Setup & Architecture",
-      description: "Design and implement robust system architectures with scalable infrastructure and optimal performance configurations.",
+      description:
+        "Design and implement robust system architectures with scalable infrastructure and optimal performance configurations.",
       icon: <Server className="w-4 h-4 text-orange-500" />,
       status: "Available",
       tags: ["Architecture", "Infrastructure", "Scalability"],
@@ -78,7 +95,9 @@ const Services = () => {
       preview: (
         <div className="relative bg-zinc-900/50 rounded-lg border border-white/10 h-48 flex items-center justify-center overflow-hidden group-hover:border-orange-500/30 transition-all duration-300">
           <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300"></div>
-          <div className="text-white/40 text-sm font-medium relative z-10">System Architecture Preview</div>
+          <div className="text-white/40 text-sm font-medium relative z-10">
+            System Architecture Preview
+          </div>
         </div>
       ),
     },

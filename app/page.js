@@ -10,13 +10,13 @@ import Work from "@/components/Work";
 export default function Home() {
   return (
     <div>
-      <Hero/>
-      <Services/>
-      <Process/>
-      <CompareTable/>
-      <BookCta/>
-      <Results/>
-      <Work/>
+      <Hero />
+      <Services />
+      <Process />
+      <CompareTable />
+      <BookCta />
+      <Results />
+      <Work />
     </div>
   );
 }
