@@ -8,6 +8,7 @@ import {
   Settings,
   MessageSquare,
   Server,
+  Palette,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -97,6 +98,23 @@ const Services = () => {
           <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300"></div>
           <div className="text-white/40 text-sm font-medium relative z-10">
             System Architecture Preview
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "UI/UX",
+      description:
+        "Create beautiful, intuitive user interfaces and exceptional user experiences that engage users and drive conversions.",
+      icon: <Palette className="w-4 h-4 text-orange-500" />,
+      status: "Available",
+      tags: ["Design", "User Experience", "Interface"],
+      category: "uiux",
+      preview: (
+        <div className="relative bg-zinc-900/50 rounded-lg border border-white/10 h-48 flex items-center justify-center overflow-hidden group-hover:border-orange-500/30 transition-all duration-300">
+          <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300"></div>
+          <div className="text-white/40 text-sm font-medium relative z-10">
+            UI/UX Design Preview
           </div>
         </div>
       ),

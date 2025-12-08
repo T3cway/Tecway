@@ -13,6 +13,7 @@ const categories = [
   { id: "chatbot", label: "Chatbot", value: "chatbot" },
   { id: "infrastructure", label: "Infrastructure", value: "infrastructure" },
   { id: "setup", label: "Setup", value: "setup" },
+  { id: "uiux", label: "UI/UX", value: "uiux" },
 ];
 
 function ProjectsContent() {
