@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const WorkCard = ({ title, date, image, featured = false, className, slug, onClick }) => {
   const router = useRouter();
@@ -36,17 +37,23 @@ const WorkCard = ({ title, date, image, featured = false, className, slug, onCli
         )}
       >
         {imageSrc && !featured && (
-          <img
+          <Image
             src={imageSrc}
             alt={title}
-            className="h-full w-full object-cover  opacity-80 "
+            fill
+            className="object-cover opacity-80"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={featured}
           />
         )}
         {imageSrc && featured && (
-          <img
+          <Image
             src={imageSrc}
             alt={title}
-            className="h-full w-full object-cover opacity-90"
+            fill
+            className="object-cover opacity-90"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+            priority={featured}
           />
         )}
       </div>
