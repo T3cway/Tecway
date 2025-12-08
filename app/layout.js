@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/navBar";
 import Footer from "@/components/Fotter";
+import { getOrganizationSchema, getWebsiteSchema } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,30 +33,97 @@ const imperialScript = localFont({
   preload: false, // Only preload if used above the fold
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://tecway.dev';
+
 export const metadata = {
-  title: "Tecway - Cutting-Edge Digital Solutions",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Tecway - Cutting-Edge Digital Solutions",
+    template: "%s | Tecway",
+  },
   description: "Full-service tech agency specializing in web applications, mobile apps, AI chatbots, and custom software solutions. Transform your business with next-gen technology.",
+  keywords: [
+    "web development",
+    "mobile app development",
+    "AI chatbots",
+    "custom software",
+    "UI/UX design",
+    "Flutter",
+    "React",
+    "Next.js",
+    "digital solutions",
+    "tech agency",
+  ],
+  authors: [{ name: "Tecway" }],
+  creator: "Tecway",
+  publisher: "Tecway",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: "/Tecway.png",
     shortcut: "/Tecway.png",
     apple: "/Tecway.png",
   },
-  // Performance optimizations
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: SITE_URL,
+    siteName: "Tecway",
+    title: "Tecway - Cutting-Edge Digital Solutions",
+    description: "Full-service tech agency specializing in web applications, mobile apps, AI chatbots, and custom software solutions. Transform your business with next-gen technology.",
+    images: [
+      {
+        url: `${SITE_URL}/Tecway.png`,
+        width: 1200,
+        height: 630,
+        alt: "Tecway - Cutting-Edge Digital Solutions",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
     title: "Tecway - Cutting-Edge Digital Solutions",
     description: "Full-service tech agency specializing in web applications, mobile apps, AI chatbots, and custom software solutions.",
-    type: "website",
+    images: [`${SITE_URL}/Tecway.png`],
+  },
+  alternates: {
+    canonical: SITE_URL,
+  },
+  verification: {
+    // Add verification codes when available
+    // google: 'your-google-verification-code',
+    // yandex: 'your-yandex-verification-code',
+    // bing: 'your-bing-verification-code',
   },
 };
 
 export default function RootLayout({ children }) {
+  const organizationSchema = getOrganizationSchema();
+  const websiteSchema = getWebsiteSchema();
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${bitcountPropSingle.variable} ${imperialScript.variable} antialiased`}
         suppressHydrationWarning
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <NavBar />
 
         {children}
