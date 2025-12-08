@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "title": "Shaheen AI",
+    "description": "Advanced AI platform for intelligent automation",
+    "longDescription": "Shaheen AI is a comprehensive artificial intelligence platform designed to streamline business operations through intelligent automation. The platform leverages cutting-edge machine learning algorithms to provide predictive analytics, natural language processing, and automated decision-making capabilities.",
+    "category": ["chatbot", "web"],
+    "images": ["retro.png"],
+    "techStack": ["React", "Next.js", "Python", "TensorFlow", "OpenAI"],
+    "date": "Jan 25, 2025",
+    "featured": true,
+    "slug": "shaheen-ai",
+    "client": "TechCorp Industries",
+    "challenges": [
+      "Integrating multiple AI models into a unified platform",
+      "Ensuring real-time performance with large datasets",
+      "Creating an intuitive user interface for complex AI operations"
+    ],
+    "solutions": [
+      "Developed a microservices architecture for scalable AI processing",
+      "Implemented caching layers and optimized database queries",
+      "Created a component-based UI with real-time feedback"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Docline",
+    "description": "cross platform mobile application for telehealth services",
+    "longDescription": "a full-stack telehealth application built with Flutter that enables secure video consultations, real-time messaging, appointment management, and comprehensive medical record keeping. The platform serves three distinct user roles: patients, doctors, and administrators, providing a complete healthcare ecosystem, HIPAA-compliant mobile application that connects healthcare providers with patients. Features include appointment scheduling, telemedicine capabilities, prescription management, medical records access, and secure messaging.",
+    "category": ["mobile"],
+    "images": ["projects/docline.png","projects/docline1.png","projects/docline2.png","projects/docline3.png","projects/docline4.png"],
+    "techStack": ["Flutter", "Dart", "Firebase", "Supabase"],
+    "date": "Jun 20, 2025",
+    "featured": false,
+    "slug": "docline",
+    "client": "Docline"
+  },
+  {
+    "id": 3,
+    "title": "«مكتبة السودان الرقمية»",
+    "description": "Digital library for the Sudan",
+    "longDescription": "A digital library for the Sudan, built this library using React, Next.js, Tailwind CSS, and PostgreSQL. I also built the backend using Node.js, Express, and PostgreSQL.",
+    "category": ["web"],
+    "images": ["projects/sudanl.jpg"],
+    "video": "projects/sudanl.mp4",
+    "techStack": ["React", "Next.js", "Tailwind CSS", "PostgreSQL"],
+    "date": "Oct 15, 2022",
+    "featured": false,
+    "slug": "sudan-digital-library",
+    "client": "Sudan Digital Library"
+  },
+  {
+    "id": 4,
+    "title": "AI Customer Support Chatbot",
+    "description": "Intelligent chatbot for 24/7 customer support",
+    "longDescription": "An advanced AI-powered chatbot system that handles customer inquiries, provides product information, processes orders, and escalates complex issues to human agents. The system uses natural language understanding to provide accurate and contextually relevant responses.",
+    "category": ["chatbot"],
+    "images": ["retro.png"],
+    "techStack": ["Python", "OpenAI GPT-4", "FastAPI", "MongoDB", "WebSocket"],
+    "date": "Jan 10, 2025",
+    "featured": false,
+    "slug": "ai-customer-support-chatbot",
+    "client": "ServicePro Solutions"
+  },
+  {
+    "id": 5,
+    "title": "Aramco CCC Infrastructure",
+    "description": "Complete infrastructure setup and configuration",
+    "longDescription": "A comprehensive infrastructure setup project for Aramco CCC, involving cloud architecture design, security implementation, database configuration, and deployment pipelines. The system ensures high availability, scalability, and compliance with enterprise security standards.",
+    "category": ["setup", "infrastructure"],
+    "images": ["modern-setup.png"],
+    "techStack": ["AWS", "Docker", "Kubernetes", "Terraform", "Ansible"],
+    "date": "Jan 5, 2025",
+    "featured": false,
+    "slug": "aramco-ccc-infrastructure",
+    "client": "Aramco CCC",
+    "challenges": [
+      "Ensuring compliance with strict security requirements",
+      "Designing for high availability and disaster recovery",
+      "Managing complex multi-region deployments"
+    ],
+    "solutions": [
+      "Implemented comprehensive security policies and monitoring",
+      "Designed redundant architecture with automatic failover",
+      "Created automated deployment pipelines with rollback capabilities"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "MD Assistant",
+    "description": "AI-powered medical assistant for doctors",
+    "longDescription": "A desktop app and system that utilizes Python's native libraries to merge multiple files into a single document, cross-check it with different .xlsx files and provides a final checked file, enhancing user productivity and document management by saving the Users up to 2 hrs of daily work..",
+    "category": ["infrastructure"],
+    "images": ["projects/MD.png"],
+    "techStack": ["Python", "PyQt6", "Pandas", "Openpyxl", "Tkinter"],
+    "date": "Mar 18, 2025",
+    "featured": false,
+    "slug": "md-assistant",
+    "client": "MD Assistant",
+    "challenges": [
+      "Integrating multiple AI models into a unified platform",
+      "Ensuring real-time performance with large datasets",
+      "Creating an intuitive user interface for complex AI operations"
+    ],
+    "solutions": [
+      "Developed a microservices architecture for scalable AI processing",
+      "Implemented caching layers and optimized database queries",
+      "Created a component-based UI with real-time feedback"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "SaaS Platform Web Application",
+    "description": "Full-stack SaaS platform for business management",
+    "longDescription": "A comprehensive Software-as-a-Service platform that helps businesses manage their operations, from customer relationship management to project tracking and financial reporting. The platform features role-based access control, real-time collaboration, and extensive customization options.",
+    "category": ["web"],
+    "images": ["retro.png"],
+    "techStack": ["Next.js", "Node.js", "PostgreSQL", "Redis", "Stripe"],
+    "date": "Dec 20, 2024",
+    "featured": false,
+    "slug": "saas-platform-web-application",
+    "client": "BusinessFlow Inc."
+  },
+  {
+    "id": 8,
+    "title": "Pathfinder",
+    "description": "Mobile application for tracking your journey",
+    "longDescription": "A fleet management system that allows organizations to track and manage their fleet of vehicles in real-time, I co-founded this fleet-tracking system startup, we built it using Micro-services architecture, I designed, build and developed the Mobile app and many microservices and their database..",
+    "category": ["mobile"],
+    "images": ["projects/pf/image.png","projects/pf/1.png", "projects/pf/1.5.png","projects/pf/2.png","projects/pf/3.png","projects/pf/4.png","projects/pf/5.png"],
+    "techStack": ["React Native", "TypeScript", "Node.js", "MongoDB", "Twilio"],
+    "date": "Dec 15, 2024",
+    "featured": false,
+    "slug": "pathfinder",
+    "client": "Pathfinder"
+  }
+]
+
