@@ -19,7 +19,9 @@ function ProjectsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const categoryParam = searchParams.get("category");
-  const [selectedCategory, setSelectedCategory] = useState(categoryParam || "all");
+  const [selectedCategory, setSelectedCategory] = useState(
+    categoryParam || "all"
+  );
 
   const filteredProjects =
     selectedCategory === "all"
@@ -27,7 +29,9 @@ function ProjectsContent() {
       : getProjectsByCategory(selectedCategory);
 
   const featuredProject = filteredProjects.find((p) => p.featured);
-  const otherProjects = filteredProjects.filter((p) => p.id !== featuredProject?.id);
+  const otherProjects = filteredProjects.filter(
+    (p) => p.id !== featuredProject?.id
+  );
 
   useEffect(() => {
     if (categoryParam && categoryParam !== selectedCategory) {
@@ -82,7 +86,9 @@ function ProjectsContent() {
         {/* Projects Grid */}
         {filteredProjects.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-white/40 text-xl">No projects found in this category.</p>
+            <p className="text-white/40 text-xl">
+              No projects found in this category.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
@@ -107,7 +113,10 @@ function ProjectsContent() {
                 // First project spans 2 columns on large screens for emphasis
                 if (index === 0) {
                   return (
-                    <div key={project.id} className="md:col-span-2 lg:col-span-2">
+                    <div
+                      key={project.id}
+                      className="md:col-span-2 lg:col-span-2"
+                    >
                       <WorkCard
                         title={project.title}
                         date={project.date}
@@ -121,7 +130,10 @@ function ProjectsContent() {
                 // Every 5th project after the first also spans 2 columns for variety
                 if ((index - 1) % 5 === 0 && index > 0) {
                   return (
-                    <div key={project.id} className="md:col-span-2 lg:col-span-2">
+                    <div
+                      key={project.id}
+                      className="md:col-span-2 lg:col-span-2"
+                    >
                       <WorkCard
                         title={project.title}
                         date={project.date}
@@ -133,7 +145,7 @@ function ProjectsContent() {
                   );
                 }
               }
-              
+
               // Regular single-column cards
               return (
                 <div key={project.id}>
@@ -156,13 +168,14 @@ function ProjectsContent() {
 
 export default function ProjectsPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-white/60">Loading projects...</div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-black flex items-center justify-center">
+          <div className="text-white/60">Loading projects...</div>
+        </div>
+      }
+    >
       <ProjectsContent />
     </Suspense>
   );
 }
-
