@@ -67,11 +67,7 @@ export function BentoGrid({ items = [], onClick }) {
             </div>
 
             {/* Preview component slot */}
-            {item.preview && (
-              <div className="mt-4 flex-1">
-                {item.preview}
-              </div>
-            )}
+            {item.preview && <div className="mt-4 flex-1">{item.preview}</div>}
 
             <div className="flex items-center justify-between mt-auto pt-4">
               {item.tags && item.tags.length > 0 && (
@@ -104,4 +100,3 @@ export function BentoGrid({ items = [], onClick }) {
     </div>
   );
 }
-
