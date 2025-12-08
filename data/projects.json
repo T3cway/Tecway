@@ -28,7 +28,7 @@
     "description": "cross platform mobile application for telehealth services",
     "longDescription": "a full-stack telehealth application built with Flutter that enables secure video consultations, real-time messaging, appointment management, and comprehensive medical record keeping. The platform serves three distinct user roles: patients, doctors, and administrators, providing a complete healthcare ecosystem, HIPAA-compliant mobile application that connects healthcare providers with patients. Features include appointment scheduling, telemedicine capabilities, prescription management, medical records access, and secure messaging.",
     "category": ["mobile"],
-    "images": ["projects/docline.png","projects/docline1.png","projects/docline2.png","projects/docline3.png","projects/docline4.png"],
+    "images": ["projects/docline.webp","projects/docline1.webp","projects/docline2.webp","projects/docline3.webp","projects/docline4.webp"],
     "techStack": ["Flutter", "Dart", "Firebase", "Supabase"],
     "date": "Jun 20, 2025",
     "featured": false,
@@ -41,7 +41,7 @@
     "description": "Digital library for the Sudan",
     "longDescription": "A digital library for the Sudan, built this library using React, Next.js, Tailwind CSS, and PostgreSQL. I also built the backend using Node.js, Express, and PostgreSQL.",
     "category": ["web"],
-    "images": ["projects/sudanl.jpg"],
+    "images": ["projects/sudanl.webp"],
     "video": "projects/sudanl.mp4",
     "techStack": ["React", "Next.js", "Tailwind CSS", "PostgreSQL"],
     "date": "Oct 15, 2022",
@@ -91,7 +91,7 @@
     "description": "AI-powered medical assistant for doctors",
     "longDescription": "A desktop app and system that utilizes Python's native libraries to merge multiple files into a single document, cross-check it with different .xlsx files and provides a final checked file, enhancing user productivity and document management by saving the Users up to 2 hrs of daily work..",
     "category": ["infrastructure"],
-    "images": ["projects/MD.png"],
+    "images": ["projects/MD.webp"],
     "techStack": ["Python", "PyQt6", "Pandas", "Openpyxl", "Tkinter"],
     "date": "Mar 18, 2025",
     "featured": false,
@@ -127,12 +127,25 @@
     "description": "Mobile application for tracking your journey",
     "longDescription": "A fleet management system that allows organizations to track and manage their fleet of vehicles in real-time, I co-founded this fleet-tracking system startup, we built it using Micro-services architecture, I designed, build and developed the Mobile app and many microservices and their database..",
     "category": ["mobile"],
-    "images": ["projects/pf/image.png","projects/pf/1.png", "projects/pf/1.5.png","projects/pf/2.png","projects/pf/3.png","projects/pf/4.png","projects/pf/5.png"],
+    "images": ["projects/pf/image.webp","projects/pf/1.webp", "projects/pf/1.5.webp","projects/pf/2.webp","projects/pf/3.webp","projects/pf/4.webp","projects/pf/5.webp"],
     "techStack": ["React Native", "TypeScript", "Node.js", "MongoDB", "Twilio"],
     "date": "Dec 15, 2024",
     "featured": false,
     "slug": "pathfinder",
     "client": "Pathfinder"
+  },
+  {
+    "id": 9,
+    "title": "HomeStyle",
+    "description": "Modern UI/UX design for a furniture business mobile application",
+    "longDescription": "A comprehensive UI/UX design project for a furniture retail mobile application, focusing on creating an intuitive and visually appealing shopping experience. The design includes product browsing, detailed product views, AR room visualization, shopping cart functionality, and seamless checkout flow. The interface emphasizes modern aesthetics with clean layouts, high-quality product imagery, and user-friendly navigation to enhance the furniture shopping experience.",
+    "category": ["uiux","mobile"],
+    "images": ["projects/designs/fer/1.png", "projects/designs/fer/2.png", "projects/designs/fer/3.png", "projects/designs/fer/4.png", "projects/designs/fer/5.png", "projects/designs/fer/6.png", "projects/designs/fer/7.png", "projects/designs/fer/8.png", "projects/designs/fer/9.png"],
+    "techStack": ["Figma", "Adobe XD", "Adobe Photoshop", "Adobe Illustrator"],
+    "date": "Dec 15, 2024",
+    "featured": false,
+    "slug": "fer",
+    "client": "Fer"
   }
 ]
 

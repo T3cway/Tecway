@@ -3,6 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Font Face Declarations - Removed duplicate declarations as fonts are now loaded via next/font/local */
+/* This prevents double loading and improves performance */
+
 body {
   background-color:black;
   color: white;
@@ -122,6 +125,17 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom Font Classes */
+.font-bitcount {
+  font-family: 'Bitcount Prop Single', var(--font-bitcount-prop-single), sans-serif;
+}
+
+.font-monsieur {
+  font-family: 'Imperial Script', cursive, serif;
+  font-weight: bold;
+  font-style: bold;
 }
 
 /* Calendly Orange Theme Customization */

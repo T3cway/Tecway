@@ -223,7 +223,8 @@ void main(){gl_Position=position;}`;
     if (!canvasRef.current) return;
     
     const canvas = canvasRef.current;
-    const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+    // Reduced DPR for better performance (0.5 instead of 0.5 * devicePixelRatio)
+    const dpr = Math.max(1, Math.min(1.5, window.devicePixelRatio * 0.5));
     
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
@@ -233,21 +234,11 @@ void main(){gl_Position=position;}`;
     }
   };
 
-  const loop = (now) => {
-    if (!rendererRef.current || !pointersRef.current) return;
-    
-    rendererRef.current.updateMouse(pointersRef.current.first);
-    rendererRef.current.updatePointerCount(pointersRef.current.count);
-    rendererRef.current.updatePointerCoords(pointersRef.current.coords);
-    rendererRef.current.updateMove(pointersRef.current.move);
-    rendererRef.current.render(now);
-    animationFrameRef.current = requestAnimationFrame(loop);
-  };
-
   useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
-    const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+    // Reduced DPR for better performance
+    const dpr = Math.max(1, Math.min(1.5, window.devicePixelRatio * 0.5));
     
     rendererRef.current = new WebGLRenderer(canvas, dpr);
     pointersRef.current = new PointerHandler(canvas, dpr);
@@ -261,11 +252,43 @@ void main(){gl_Position=position;}`;
       rendererRef.current.updateShader(defaultShaderSource);
     }
     
-    loop(0);
+    let isVisible = true;
+    let lastFrameTime = 0;
+    const targetFPS = 30; // Reduced from 60fps to 30fps for better performance
+    const frameInterval = 1000 / targetFPS;
     
+    // Throttled loop for better performance
+    const throttledLoop = (now) => {
+      if (!isVisible) {
+        animationFrameRef.current = requestAnimationFrame(throttledLoop);
+        return;
+      }
+      
+      const elapsed = now - lastFrameTime;
+      if (elapsed >= frameInterval) {
+        if (rendererRef.current && pointersRef.current) {
+          rendererRef.current.updateMouse(pointersRef.current.first);
+          rendererRef.current.updatePointerCount(pointersRef.current.count);
+          rendererRef.current.updatePointerCoords(pointersRef.current.coords);
+          rendererRef.current.updateMove(pointersRef.current.move);
+          rendererRef.current.render(now);
+        }
+        lastFrameTime = now - (elapsed % frameInterval);
+      }
+      animationFrameRef.current = requestAnimationFrame(throttledLoop);
+    };
+    
+    // Handle visibility change to pause animation when tab is hidden
+    const handleVisibilityChange = () => {
+      isVisible = !document.hidden;
+    };
+    
+    throttledLoop(0);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('resize', resize);
     
     return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', resize);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -321,10 +344,20 @@ const Hero = ({
           {/* Main Heading with Animation */}
           <div className="space-y-2">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent animate-fade-in-up animation-delay-200">
-              {headline.line1}
+              {headline.line1.split(' ').map((word, index, arr) => {
+                if (word.toLowerCase() === 'fuel') {
+                  return <span key={index} className="font-monsieur text-6xl md:text-8xl lg:text-9xl">{word}{index < arr.length - 1 ? ' ' : ''}</span>;
+                }
+                return <span key={index}>{word}{index < arr.length - 1 ? ' ' : ''}</span>;
+              })}
             </h1>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 bg-clip-text text-transparent animate-fade-in-up animation-delay-400">
-              {headline.line2}
+              {headline.line2.split(' ').map((word, index, arr) => {
+                if (word.toLowerCase().includes('technology')) {
+                  return <span key={index} className="font-monsieur">{word}{index < arr.length - 1 ? ' ' : ''}</span>;
+                }
+                return <span key={index}>{word}{index < arr.length - 1 ? ' ' : ''}</span>;
+              })}
             </h1>
           </div>
           

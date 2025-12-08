@@ -6,59 +6,115 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Plus, Minus } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
     id: "1",
-    question: "01. What does the membership include?",
+    question: "What services do you offer?",
     answer:
-      "The membership gives you unlimited access to our AI tools, regular updates, priority support, and expert resources to help you achieve your business goals.",
+      "We build mobile applications, websites, custom software systems, chatbot solutions (AI-powered and rule-based), and provide full UI/UX design services.",
   },
   {
     id: "2",
-    question: "02. How do I get started with your services?",
+    question: "Which industries do you work with?",
     answer:
-      "Getting started is easy! Simply sign up for an account, choose your membership plan, and you'll have immediate access to all our tools and resources.",
+      "We work across multiple industries including healthcare, finance, e-commerce, logistics, education, startups, and enterprise systems.",
   },
   {
     id: "3",
-    question: "03. Can I cancel my membership anytime?",
+    question: "How much does it cost to build a mobile app or website?",
     answer:
-      "Yes, you can cancel your membership at any time. There are no long-term commitments, and you'll retain access until the end of your billing period.",
+      "Pricing depends on the project scope, features, complexity, and timeline. We provide a free consultation and send a detailed quote based on your requirements.",
   },
   {
     id: "4",
-    question: "04. Do I need technical expertise to use your tools?",
+    question: "How long will it take to build my project?",
     answer:
-      "No technical expertise is required. Our tools are designed to be user-friendly and intuitive, with comprehensive guides and support available whenever you need help.",
+      "Most websites take 2–6 weeks, mobile apps 1–3 months, and complex systems may take longer. A timeline is shared after requirement analysis.",
   },
   {
     id: "5",
-    question: "05. Are there additional costs?",
+    question: "Do you offer UI/UX design only?",
     answer:
-      "Your membership includes everything you need. There are no hidden fees or additional costs unless you choose to upgrade to a premium tier.",
+      "Yes. We offer standalone UI/UX services including wireframes, prototyping, branding, and full design systems.",
   },
   {
     id: "6",
-    question: "06. How often do you release updates?",
+    question: "Will you maintain and update my app or website after launch?",
     answer:
-      "We release updates regularly, typically on a monthly basis. All updates are included in your membership at no extra cost.",
+      "Yes. We provide ongoing maintenance, updates, bug fixes, and feature extensions.",
+  },
+  {
+    id: "7",
+    question: "Do you use Flutter, React, or native development?",
+    answer:
+      "We offer Flutter, React Native, Swift, Kotlin, and web frameworks (React, Next.js, Vue, Laravel, Node.js, etc.). We choose the best stack for your needs.",
+  },
+  {
+    id: "8",
+    question: "Can you integrate third-party APIs or AI systems like ChatGPT/Gemini?",
+    answer:
+      "Absolutely. We integrate AI models, payment gateways, CRM systems, ERPs, and custom APIs.",
+  },
+  {
+    id: "9",
+    question: "Do you provide hosting and deployment?",
+    answer:
+      "Yes, we handle cloud hosting (AWS, Supabase, Firebase, Vercel), backend setup, CI/CD pipelines, and security.",
+  },
+  {
+    id: "10",
+    question: "Will my app/project be scalable?",
+    answer:
+      "Yes. We use scalable architectures (microservices, serverless, modular design) to support growth.",
+  },
+  {
+    id: "11",
+    question: "Do you sign NDAs and provide source code?",
+    answer:
+      "Yes. NDAs, full privacy, and complete source-code ownership are part of all our contracts.",
+  },
+  {
+    id: "12",
+    question: "Do you support Arabic/English or multi-language apps?",
+    answer:
+      "Yes. We build fully multilingual and RTL-friendly apps and websites.",
+  },
+  {
+    id: "13",
+    question: "What is your development process?",
+    answer:
+      "1. Requirement analysis\n2. UI/UX design\n3. Development (mobile/web/backend/system)\n4. Testing\n5. Deployment\n6. Maintenance and support",
+  },
+  {
+    id: "14",
+    question: "Do you help with publishing apps to App Store and Google Play?",
+    answer:
+      "Yes, we handle publishing, optimization, and compliance.",
+  },
+  {
+    id: "15",
+    question: "Can you redesign or fix an existing project?",
+    answer:
+      "Yes, we take over incomplete projects, refactor code, improve UI/UX, and enhance performance.",
   },
 ];
 
-export function FAQSection() {
+function FAQSection() {
   return (
-    <section className="w-full py-20 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-5xl">
+    <section id="faqs" className="w-full py-24 px-4 sm:px-6 lg:px-8 bg-black">
+      <div className="mx-auto max-w-6xl">
         {/* Header */}
-        <div className="mb-16 text-center">
-          <h1 className="mb-4 text-6xl md:text-7xl font-light tracking-tight text-white">
-            FAQs
-          </h1>
-          <p className="text-xl text-white/40 max-w-3xl mx-auto">
-            Find answers to the most common questions about our services, AI
-            solutions, and how we can help your business grow.
+        <div className="mb-20 text-center">
+          <div className="inline-flex items-center justify-center mb-6">
+            <HelpCircle className="w-8 h-8 text-orange-500/60 mr-3" />
+            <h1 className="text-6xl md:text-7xl font-light tracking-tight text-white">
+              FAQs
+            </h1>
+          </div>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Find answers to the most common questions about our services and how we can help your business grow.
           </p>
         </div>
 
@@ -66,25 +122,35 @@ export function FAQSection() {
         <Accordion
           type="single"
           collapsible
-          defaultValue="1"
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-5"
         >
-          {faqs.map((faq) => (
+          {faqs.map((faq, index) => (
             <AccordionItem
               key={faq.id}
               value={faq.id}
-              className="overflow-hidden rounded-xl border border-[#7a3e1d] bg-transparent shadow-[0_4px_20px_rgba(122,62,29,0.3)]"
+              className="group overflow-hidden rounded-xl border border-zinc-800 bg-[#0C0C0D] shadow-lg transition-all duration-300 hover:border-orange-500/30 hover:shadow-[0_8px_30px_rgba(249,115,22,0.1)]"
             >
-              <AccordionTrigger className="group flex w-full items-center justify-between bg-[#0C0C0C] px-8 py-7 text-left text-lg font-normal text-white transition-all duration-300 ease-in-out hover:no-underline data-[state=open]:bg-[#0C0C0C] [&[data-state=open]>svg]:rotate-0">
-                <span className="font-medium">{faq.question}</span>
-                <div className="relative ml-4 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1a1a1a] transition-all duration-300 ease-in-out group-data-[state=open]:shadow-[0_0_15px_rgba(122,62,29,0.6)]">
-                  <Plus className="absolute h-6 w-6 text-white transition-all duration-300 ease-in-out group-data-[state=open]:rotate-90 group-data-[state=open]:opacity-0" />
-                  <Minus className="absolute h-6 w-6 text-white transition-all duration-300 ease-in-out group-data-[state=closed]:rotate-90 group-data-[state=closed]:opacity-0" />
+              {/* Accent bar */}
+              <div className="h-0.5 bg-gradient-to-r from-amber-900 via-orange-800 to-amber-900 opacity-0 group-data-[state=open]:opacity-100 transition-opacity duration-300" />
+              
+              <AccordionTrigger className="group flex w-full items-center justify-between bg-[#0C0C0D] px-8 py-6 text-left transition-all duration-300 ease-in-out hover:no-underline hover:bg-zinc-900/30 data-[state=open]:bg-zinc-900/20">
+                <div className="flex items-start gap-4 flex-1">
+                  <span className="text-sm font-mono text-zinc-500 mt-1 min-w-[2rem]">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-lg font-normal text-white group-hover:text-orange-400/90 transition-colors duration-200">
+                    {faq.question}
+                  </span>
+                </div>
+                <div className="relative ml-4 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 transition-all duration-300 ease-in-out group-hover:border-orange-500/50 group-data-[state=open]:bg-orange-500/10 group-data-[state=open]:border-orange-500/50">
+                  <ChevronDown className="h-5 w-5 text-zinc-400 transition-all duration-300 ease-in-out group-data-[state=open]:rotate-180 group-data-[state=open]:text-orange-400 group-hover:text-orange-400/70" />
                 </div>
               </AccordionTrigger>
 
-              <AccordionContent className="bg-[#0C0C0C] px-6 pb-6 pt-0 text-lg leading-relaxed text-gray-400 transition-all duration-300 ease-in-out">
-                {faq.answer}
+              <AccordionContent className="bg-[#0C0C0D] px-8 pb-6 pt-0 text-base leading-relaxed text-gray-300 transition-all duration-300 ease-in-out whitespace-pre-line border-t border-zinc-800/50">
+                <div className="pt-4 pl-12">
+                  {faq.answer}
+                </div>
               </AccordionContent>
             </AccordionItem>
           ))}
@@ -93,3 +159,5 @@ export function FAQSection() {
     </section>
   );
 }
+
+export default FAQSection;
