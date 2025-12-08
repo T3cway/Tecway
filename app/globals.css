@@ -3,6 +3,23 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Bitcount Prop Single';
+  src: url('/Bitcount_Prop_Single/static/BitcountPropSingle-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Imperial Script';
+  src: url('/Imperial_Script/ImperialScript-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   background-color:black;
   color: white;
@@ -122,6 +139,17 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom Font Classes */
+.font-bitcount {
+  font-family: 'Bitcount Prop Single', var(--font-bitcount-prop-single), sans-serif;
+}
+
+.font-monsieur {
+  font-family: 'Imperial Script', cursive, serif;
+  font-weight: bold;
+  font-style: bold;
 }
 
 /* Calendly Orange Theme Customization */

@@ -344,10 +344,20 @@ const Hero = ({
           {/* Main Heading with Animation */}
           <div className="space-y-2">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent animate-fade-in-up animation-delay-200">
-              {headline.line1}
+              {headline.line1.split(' ').map((word, index, arr) => {
+                if (word.toLowerCase() === 'fuel') {
+                  return <span key={index} className="font-monsieur text-6xl md:text-8xl lg:text-9xl">{word}{index < arr.length - 1 ? ' ' : ''}</span>;
+                }
+                return <span key={index}>{word}{index < arr.length - 1 ? ' ' : ''}</span>;
+              })}
             </h1>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 bg-clip-text text-transparent animate-fade-in-up animation-delay-400">
-              {headline.line2}
+              {headline.line2.split(' ').map((word, index, arr) => {
+                if (word.toLowerCase().includes('technology')) {
+                  return <span key={index} className="font-monsieur">{word}{index < arr.length - 1 ? ' ' : ''}</span>;
+                }
+                return <span key={index}>{word}{index < arr.length - 1 ? ' ' : ''}</span>;
+              })}
             </h1>
           </div>
           

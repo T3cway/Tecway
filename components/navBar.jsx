@@ -56,7 +56,7 @@ const NavBar = () => {
                 className="h-10 w-10"
                 priority
               />
-              <span className="text-xl font-semibold text-white">Tecway</span>
+              <span className="text-xl font-semibold text-white font-bitcount">Tecway</span>
             </Link>
           </div>
 

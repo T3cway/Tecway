@@ -92,7 +92,7 @@ const CompareTable = () => {
           {/* Right Column - Tecway */}
           <div className="space-y-8">
             <h2 className="text-2xl font-normal">
-              Working with <span className="text-orange-600">Tecway</span>
+              Working with <span className="text-orange-600 font-bitcount">Tecway</span>
             </h2>
 
             <div className="space-y-6">

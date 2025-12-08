@@ -136,8 +136,9 @@
   },
   {
     "id": 9,
-    "title": "",
-    "description": "...",
+    "title": "HomeStyle",
+    "description": "Modern UI/UX design for a furniture business mobile application",
+    "longDescription": "A comprehensive UI/UX design project for a furniture retail mobile application, focusing on creating an intuitive and visually appealing shopping experience. The design includes product browsing, detailed product views, AR room visualization, shopping cart functionality, and seamless checkout flow. The interface emphasizes modern aesthetics with clean layouts, high-quality product imagery, and user-friendly navigation to enhance the furniture shopping experience.",
     "category": ["uiux","mobile"],
     "images": ["projects/designs/fer/1.png", "projects/designs/fer/2.png", "projects/designs/fer/3.png", "projects/designs/fer/4.png", "projects/designs/fer/5.png", "projects/designs/fer/6.png", "projects/designs/fer/7.png", "projects/designs/fer/8.png", "projects/designs/fer/9.png"],
     "techStack": ["Figma", "Adobe XD", "Adobe Photoshop", "Adobe Illustrator"],
