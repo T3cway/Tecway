@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { forwardRef, useRef, useMemo, useLayoutEffect } from "react";
+import { forwardRef, useRef, useMemo, useLayoutEffect, useState, useEffect } from "react";
 import { Color } from "three";
 
 const hexToNormalizedRGB = (hex) => {
@@ -147,12 +147,72 @@ const AnimatedHero = ({
   rotation = 0,
   className = "",
 }) => {
+  const heroRef = useRef(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    let rafId = null;
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!heroRef.current) return;
+
+      const heroRect = heroRef.current.getBoundingClientRect();
+      const heroHeight = heroRect.height;
+      const heroTop = heroRect.top;
+      
+      // Calculate scroll progress: 0 when hero is fully visible, 1 when completely scrolled past
+      // The curtain starts moving immediately when user scrolls
+      const scrollEnd = heroHeight; // Complete effect when hero is fully scrolled past
+      
+      // Calculate how much of the hero has been scrolled
+      const scrolled = Math.max(0, -heroTop);
+      const progress = Math.min(1, scrolled / scrollEnd);
+      
+      setScrollProgress(progress);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        rafId = requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    };
+
+    // Initial call
+    handleScroll();
+    
+    // Listen to scroll and resize events
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
+
+  // Calculate transform based on scroll progress
+  // As user scrolls down, curtain moves up (negative translateY)
+  // Maximum movement: -100% (fully raised)
+  const translateY = -scrollProgress * 100;
+  const opacity = Math.max(0, 1 - scrollProgress * 1.2); // Fade out as curtain raises
+
   return (
     <div
+      ref={heroRef}
       className={`relative w-full h-screen overflow-hidden bg-black ${className}`}
     >
-      {/* Animated Shader Background - Optimized with will-change */}
-      <div className="absolute inset-0 blur-[29px] will-change-transform">
+      {/* Animated Shader Background - Curtain effect with scroll-based transform */}
+      <div 
+        className="absolute inset-0 blur-[29px] will-change-transform"
+        style={{
+          transform: `translateY(${translateY}%)`,
+          opacity: opacity,
+        }}
+      >
         <Silk
           speed={speed}
           scale={scale}
