@@ -79,7 +79,10 @@ const SilkPlane = forwardRef(function SilkPlane({ uniforms }, ref) {
   }, [ref, viewport]);
 
   useFrame((_, delta) => {
-    ref.current.material.uniforms.uTime.value += 0.1 * delta;
+    if (ref.current && ref.current.material) {
+      // Throttle animation for better performance
+      ref.current.material.uniforms.uTime.value += 0.08 * delta;
+    }
   });
 
   return (
@@ -117,7 +120,16 @@ const Silk = ({
   );
 
   return (
-    <Canvas dpr={[1, 2]} frameloop="always">
+    <Canvas 
+      dpr={[1, 1.5]} 
+      frameloop="always"
+      performance={{ min: 0.5 }}
+      gl={{ 
+        antialias: false,
+        alpha: true,
+        powerPreference: "high-performance"
+      }}
+    >
       <SilkPlane ref={meshRef} uniforms={uniforms} />
     </Canvas>
   );
@@ -139,8 +151,8 @@ const AnimatedHero = ({
     <div
       className={`relative w-full h-screen overflow-hidden bg-black ${className}`}
     >
-      {/* Animated Shader Background */}
-      <div className="absolute inset-0 blur-[29px]">
+      {/* Animated Shader Background - Optimized with will-change */}
+      <div className="absolute inset-0 blur-[29px] will-change-transform">
         <Silk
           speed={speed}
           scale={scale}

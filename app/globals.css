@@ -282,7 +282,7 @@ body {
   display: none;  /* Chrome, Safari and Opera */
 }
 
-/* Liquid glass navbar effect */
+/* Liquid glass navbar effect - Optimized for performance */
 .liquid-glass-nav {
   position: relative;
   border-radius: 999px;
@@ -292,6 +292,8 @@ body {
   box-shadow: 0px 6px 21px -8px rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  will-change: transform, backdrop-filter;
+  transform: translateZ(0); /* Force GPU acceleration */
 }
 
 .liquid-glass-nav::before {
@@ -317,4 +319,6 @@ body {
   -webkit-filter: url(#glass-distortion);
   isolation: isolate;
   pointer-events: none;
+  will-change: backdrop-filter, filter;
+  transform: translateZ(0); /* Force GPU acceleration */
 }

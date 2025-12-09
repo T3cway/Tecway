@@ -116,13 +116,16 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} ${bitcountPropSingle.variable} ${imperialScript.variable} antialiased`}
         suppressHydrationWarning
       >
+        {/* JSON-LD structured data for SEO - placed early in body for better crawlability */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          suppressHydrationWarning
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          suppressHydrationWarning
         />
         <NavBar />
 
