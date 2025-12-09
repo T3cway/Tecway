@@ -138,6 +138,15 @@ body {
   font-style: bold;
 }
 
+.font-imperial-script {
+  font-family: var(--font-imperial-script), 'Imperial Script', serif;
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
 /* Calendly Orange Theme Customization */
 .calendly-inline-widget {
   background: transparent !important;

@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react";
 
 const CompareTable = () => {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div id="why-choose-us" className="min-h-screen bg-black text-white">
       <div className="mx-auto max-w-7xl px-6 py-24">
         {/* Header Section */}
         <div className="mb-20 text-center">

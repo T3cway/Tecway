@@ -4,13 +4,17 @@ import AnimatedHero from "./AnimatedHero";
 
 const Hero = () => {
   const handlePrimaryClick = () => {
-    // Add your navigation logic here
-    console.log("Let's get started clicked!");
+    const bookCallSection = document.getElementById("book-call");
+    if (bookCallSection) {
+      bookCallSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const handleSecondaryClick = () => {
-    // Add your navigation logic here
-    console.log("How it works clicked!");
+    const whyChooseUsSection = document.getElementById("why-choose-us");
+    if (whyChooseUsSection) {
+      whyChooseUsSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (

@@ -185,7 +185,17 @@ const AnimatedHero = ({
                 )}
                 {headline.line2 && (
                   <h1 className="text-5xl md:text-7xl lg:text-8xl font-light animate-headline-slide-up headline-delay-300">
-                    {headline.line2}
+                    {headline.line2.split(/(\s+)/).map((part, index) => {
+                      // Check if this part is the word "Technology" (case-insensitive, but preserve original case)
+                      if (part.trim().toLowerCase() === 'technology' && part.trim() !== '') {
+                        return (
+                          <span key={index} className="font-monsieur">
+                            {part}
+                          </span>
+                        );
+                      }
+                      return <span key={index}>{part}</span>;
+                    })}
                   </h1>
                 )}
               </div>
