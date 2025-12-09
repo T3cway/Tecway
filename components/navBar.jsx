@@ -13,7 +13,6 @@ const NavBar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
       if (currentScrollY > 100) {
         // Hide navbar when scrolling down, show when scrolling up
         if (currentScrollY > lastScrollY) {
@@ -25,48 +24,105 @@ const NavBar = () => {
         // Always show navbar at the top
         setIsScrolled(false);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "Our Work", href: "/projects" },
     { label: "Book A Call", href: "/#book-call" },
-    { label: "FAQs", href: "/#faqs" },
     { label: "Contact", href: "/contact" },
   ];
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 px-6 py-6 bg-transparent transition-transform duration-300 ${
-        isScrolled ? '-translate-y-full' : 'translate-y-0'
-      }`}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <svg
+        width="0"
+        height="0"
+        style={{ position: "absolute" }}
+        aria-hidden="true"
+        focusable="false"
+      >
+        <defs>
+          <filter
+            id="glass-distortion"
+            x="0%"
+            y="0%"
+            width="100%"
+            height="100%"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.008 0.008"
+              numOctaves="2"
+              seed="92"
+              result="noise"
+            />
+            <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="blurred"
+              scale="150"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+      </svg>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 px-6 py-6 bg-transparent transition-transform duration-300 ${
+          isScrolled ? "-translate-y-full" : "translate-y-0"
+        }`}
+      >
+        <div className="liquid-glass-nav max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
               <Image
-                src="/Tecway.png"
+                src="/Tecway-logo.svg"
                 alt="Tecway Logo"
-                width={40}
-                height={40}
-                className="h-10 w-10"
+                width={28}
+                height={28}
+                className="h-6 w-6"
                 priority
               />
               <span className="text-xl font-semibold text-white font-bitcount">Tecway</span>
             </Link>
           </div>
 
-          <div className="flex items-center gap-4 relative z-50">
+          {/* Desktop Navigation - Expanded Links */}
+          <nav className="hidden md:flex items-center gap-6">
+            {menuItems.map((item, index) =>
+              item.href.startsWith("#") ? (
+                <a
+                  key={index}
+                  href={item.href}
+                  className="text-white hover:text-[#FE5A1F] transition-colors duration-200 text-sm font-medium"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className="text-white hover:text-[#FE5A1F] transition-colors duration-200 text-sm font-medium"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
+          </nav>
+
+          {/* Mobile Navigation - Hamburger Menu */}
+          <div className="flex md:hidden items-center gap-4 relative z-50">
             <Button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="flex items-center gap-2 text-white cursor-pointer bg-[#FE5A1F] hover:text-white hover:bg-[#fe5a1fd5] transition-colors z-50"
+              className="flex items-center gap-2 text-white cursor-pointer bg-orange-500 hover:text-white hover:bg-[#fe5a1fd5] transition-colors z-50"
             >
-              <span className="text-sm font-medium text-white">Menu</span>
               {isMenuOpen ? (
                 <X className="w-5 h-5 text-white" />
               ) : (
@@ -101,21 +157,13 @@ const NavBar = () => {
                 </nav>
               </div>
             )}
-
-            {/* Call Button */}
-            {/* <Button
-              size="icon"
-              className="bg-[#FE5A1F] hover:bg-primary/90 text-white rounded-xl"
-            >
-              <Headphones className="w-5 h-5" />
-            </Button> */}
           </div>
         </div>
       </header>
 
       {isMenuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/20"
+          className="fixed inset-0 z-40 bg-black/20 md:hidden"
           onClick={() => setIsMenuOpen(false)}
         />
       )}
