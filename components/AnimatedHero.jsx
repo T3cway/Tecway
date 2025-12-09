@@ -148,28 +148,62 @@ const AnimatedHero = ({
   className = "",
 }) => {
   const heroRef = useRef(null);
+  const containerRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const cachedHeroHeight = useRef(null);
+  const frameCountRef = useRef(0);
+  const lastProgressRef = useRef(0);
 
   useEffect(() => {
     let rafId = null;
     let ticking = false;
+    let observer = null;
+
+    // Cache hero height and only recalculate on resize
+    const updateHeroHeight = () => {
+      if (heroRef.current) {
+        cachedHeroHeight.current = heroRef.current.offsetHeight;
+      }
+    };
 
     const handleScroll = () => {
       if (!heroRef.current) return;
 
-      const heroRect = heroRef.current.getBoundingClientRect();
-      const heroHeight = heroRect.height;
-      const heroTop = heroRect.top;
+      // Throttle state updates - only update every 2 frames for better performance
+      frameCountRef.current++;
+      if (frameCountRef.current % 2 !== 0) {
+        ticking = false;
+        return;
+      }
+
+      // Use cached height to avoid recalculating on every scroll
+      if (!cachedHeroHeight.current) {
+        updateHeroHeight();
+      }
+
+      // getBoundingClientRect is necessary for accurate viewport-relative position
+      // The performance cost is mitigated by throttling (every 2 frames)
+      const heroTop = heroRef.current.getBoundingClientRect().top;
+      const scrollEnd = cachedHeroHeight.current;
       
-      // Calculate scroll progress: 0 when hero is fully visible, 1 when completely scrolled past
-      // The curtain starts moving immediately when user scrolls
-      const scrollEnd = heroHeight; // Complete effect when hero is fully scrolled past
-      
-      // Calculate how much of the hero has been scrolled
+      // Calculate scroll progress
       const scrolled = Math.max(0, -heroTop);
       const progress = Math.min(1, scrolled / scrollEnd);
       
-      setScrollProgress(progress);
+      // Only update state if progress changed significantly (reduce re-renders)
+      if (Math.abs(progress - lastProgressRef.current) > 0.01) {
+        lastProgressRef.current = progress;
+        setScrollProgress(progress);
+        
+        // Directly update CSS custom property for better performance
+        if (containerRef.current) {
+          const translateY = -progress * 100;
+          const opacity = Math.max(0, 1 - progress * 1.2);
+          containerRef.current.style.setProperty('--translate-y', `${translateY}%`);
+          containerRef.current.style.setProperty('--opacity', opacity.toString());
+        }
+      }
+      
       ticking = false;
     };
 
@@ -180,25 +214,48 @@ const AnimatedHero = ({
       }
     };
 
-    // Initial call
+    const onResize = () => {
+      updateHeroHeight();
+      onScroll(); // Recalculate on resize
+    };
+
+    // Intersection Observer to pause animations when hero is not visible
+    if (heroRef.current && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // Reduce animation intensity when not fully visible
+            if (entry.intersectionRatio < 0.5 && containerRef.current) {
+              containerRef.current.style.willChange = 'auto';
+            } else if (containerRef.current) {
+              containerRef.current.style.willChange = 'transform';
+            }
+          });
+        },
+        { threshold: [0, 0.5, 1] }
+      );
+      observer.observe(heroRef.current);
+    }
+
+    // Initial setup
+    updateHeroHeight();
     handleScroll();
     
     // Listen to scroll and resize events
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
 
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('resize', onResize);
+      if (observer) observer.disconnect();
     };
   }, []);
 
-  // Calculate transform based on scroll progress
-  // As user scrolls down, curtain moves up (negative translateY)
-  // Maximum movement: -100% (fully raised)
-  const translateY = -scrollProgress * 100;
-  const opacity = Math.max(0, 1 - scrollProgress * 1.2); // Fade out as curtain raises
+  // Memoize transform calculations
+  const translateY = useMemo(() => -scrollProgress * 100, [scrollProgress]);
+  const opacity = useMemo(() => Math.max(0, 1 - scrollProgress * 1.2), [scrollProgress]);
 
   return (
     <div
@@ -206,11 +263,13 @@ const AnimatedHero = ({
       className={`relative w-full h-screen overflow-hidden bg-black ${className}`}
     >
       {/* Animated Shader Background - Curtain effect with scroll-based transform */}
+      {/* Using CSS custom properties for better performance - avoids re-renders */}
       <div 
+        ref={containerRef}
         className="absolute inset-0 blur-[29px] will-change-transform"
         style={{
-          transform: `translateY(${translateY}%)`,
-          opacity: opacity,
+          transform: `translateY(var(--translate-y, ${translateY}%))`,
+          opacity: `var(--opacity, ${opacity})`,
         }}
       >
         <Silk
