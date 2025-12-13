@@ -24,7 +24,7 @@ const Results = () => {
           />
 
           <ResultCard
-            value={300}
+            value={10}
             suffix="+"
             title="AI innovation"
             description="Hours spent crafting smart AI tools to optimize workflows across key industries."
