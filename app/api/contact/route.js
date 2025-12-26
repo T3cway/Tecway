@@ -5,9 +5,20 @@ const url = process.env.ZEPTOMAIL_API_URL;
 const token = process.env.ZEPTOMAIL_API_TOKEN;
 
 export async function POST(request) {
+  const submissionData = {
+    timestamp: new Date().toISOString(),
+  };
+
   try {
     const body = await request.json();
     const { name, email, phone, subject, message } = body;
+
+    // Store submission data for logging (even if email fails)
+    submissionData.name = name;
+    submissionData.email = email;
+    submissionData.phone = phone;
+    submissionData.subject = subject;
+    submissionData.message = message;
 
     // Validate required fields
     if (!name || !email || !subject || !message) {
@@ -16,6 +27,9 @@ export async function POST(request) {
         { status: 400 }
       );
     }
+
+    // Log all contact form submissions for recovery purposes
+    console.log("Contact form submission:", JSON.stringify(submissionData, null, 2));
 
     // Initialize ZeptoMail client
     const client = new SendMailClient({ url, token });
@@ -55,12 +69,19 @@ export async function POST(request) {
       htmlbody: htmlBody,
     });
 
+    console.log("Email sent successfully for:", email);
     return NextResponse.json(
       { message: "Email sent successfully" },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error sending email:", error);
+    // Log the error along with submission data for recovery
+    console.error("Error sending email - Submission data:", JSON.stringify(submissionData, null, 2));
+    console.error("Error details:", {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+    });
     return NextResponse.json(
       { error: "Failed to send email" },
       { status: 500 }
