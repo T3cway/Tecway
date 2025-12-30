@@ -28,7 +28,7 @@
     "description": "cross platform mobile application for telehealth services",
     "longDescription": "a full-stack telehealth application built with Flutter that enables secure video consultations, real-time messaging, appointment management, and comprehensive medical record keeping. The platform serves three distinct user roles: patients, doctors, and administrators, providing a complete healthcare ecosystem, HIPAA-compliant mobile application that connects healthcare providers with patients. Features include appointment scheduling, telemedicine capabilities, prescription management, medical records access, and secure messaging.",
     "category": ["mobile"],
-    "images": ["projects/docline.webp","projects/docline1.webp","projects/docline2.webp","projects/docline3.webp","projects/docline4.webp"],
+    "images": ["projects/docline.webp","projects/docline2.webp","projects/docline3.webp","projects/docline4.webp"],
     "techStack": ["Flutter", "Dart", "Firebase", "Supabase"],
     "date": "Jun 20, 2025",
     "featured": false,

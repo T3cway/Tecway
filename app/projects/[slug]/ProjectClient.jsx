@@ -238,7 +238,7 @@ export default function ProjectClient({ project }) {
           <Button
             onClick={() => router.push("/projects")}
             variant="outline"
-            className="border-white/20 text-white/60 hover:text-white hover:border-orange-500/40"
+            className="border-white/20 text-orange-500 hover:text-orange-400 hover:border-orange-500/40"
           >
             View All Projects
           </Button>

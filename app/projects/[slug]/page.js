@@ -5,7 +5,8 @@ import ProjectClient from "./ProjectClient";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://tecway.dev';
 
 export async function generateMetadata({ params }) {
-  const project = getProjectBySlug(params.slug);
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -47,8 +48,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function ProjectDetailPage({ params }) {
-  const project = getProjectBySlug(params.slug);
+export default async function ProjectDetailPage({ params }) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     return <ProjectClient project={null} />;
