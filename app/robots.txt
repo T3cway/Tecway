@@ -1,0 +1,54 @@
+# robots.txt for Tecway
+# Allow all search engines and AI crawlers
+
+User-agent: *
+Allow: /
+
+# Allow AI crawlers and search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# AI and LLM crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Disallow admin and private areas (if any)
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+
+# Sitemap location
+Sitemap: https://tecway.dev/sitemap.xml

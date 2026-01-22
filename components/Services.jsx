@@ -3,7 +3,7 @@
 import { useMemo, useCallback, memo } from "react";
 import { BentoGrid } from "@/components/ui/bento-grid";
 import ChatBotPreview from "./ChatBotPreview";
-import { Globe, Smartphone, Settings, MessageSquare, Server, Palette, Code, Layers, Database, Cpu, Sparkles, Monitor } from "lucide-react";
+import { Globe, Smartphone, Settings, MessageSquare, Server, Palette, Code, Layers, Database, Cpu, Sparkles, Monitor, Building2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 // Enhanced Preview Components for each service type
@@ -183,6 +183,49 @@ InfrastructurePreview.displayName = "InfrastructurePreview";
 UIUXPreview.displayName = "UIUXPreview";
 AramcoSetupPreview.displayName = "AramcoSetupPreview";
 
+const ERPPreview = memo(() => (
+  <div className="relative bg-gradient-to-br from-zinc-900/90 to-zinc-950/90 rounded-lg border border-white/10 h-48 overflow-hidden group-hover:border-orange-500/30 transition-all duration-300">
+    <div className="absolute inset-0 p-4">
+      {/* ERP system modules visualization */}
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          <Building2 className="w-4 h-4 text-orange-500/70" />
+          <div className="h-2 bg-white/10 rounded w-28"></div>
+        </div>
+        {/* Module cards */}
+        <div className="grid grid-cols-2 gap-2">
+          <div className="bg-gradient-to-br from-orange-500/10 to-transparent rounded border border-orange-500/20 p-2">
+            <div className="h-1.5 bg-orange-500/30 rounded w-full mb-1"></div>
+            <div className="h-1 bg-white/5 rounded w-3/4"></div>
+          </div>
+          <div className="bg-gradient-to-br from-orange-500/10 to-transparent rounded border border-orange-500/20 p-2">
+            <div className="h-1.5 bg-orange-500/30 rounded w-full mb-1"></div>
+            <div className="h-1 bg-white/5 rounded w-3/4"></div>
+          </div>
+          <div className="bg-gradient-to-br from-orange-500/10 to-transparent rounded border border-orange-500/20 p-2">
+            <div className="h-1.5 bg-orange-500/30 rounded w-full mb-1"></div>
+            <div className="h-1 bg-white/5 rounded w-3/4"></div>
+          </div>
+          <div className="bg-gradient-to-br from-orange-500/10 to-transparent rounded border border-orange-500/20 p-2">
+            <div className="h-1.5 bg-orange-500/30 rounded w-full mb-1"></div>
+            <div className="h-1 bg-white/5 rounded w-3/4"></div>
+          </div>
+        </div>
+        {/* Integration lines */}
+        <div className="flex items-center justify-center gap-1 mt-2">
+          <div className="h-px bg-orange-500/20 flex-1"></div>
+          <Database className="w-3 h-3 text-orange-500/50" />
+          <div className="h-px bg-orange-500/20 flex-1"></div>
+        </div>
+      </div>
+      {/* Subtle glow effect */}
+      <div className="absolute bottom-0 right-0 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl"></div>
+    </div>
+  </div>
+));
+
+ERPPreview.displayName = "ERPPreview";
+
 // Fallback placeholder for any unmapped services
 const PreviewPlaceholder = memo(({ label, className = "" }) => (
   <div className={`relative bg-zinc-900/50 rounded-lg border border-white/10 h-48 flex items-center justify-center overflow-hidden group-hover:border-orange-500/30 transition-all duration-300 ${className}`}>
@@ -201,13 +244,14 @@ const iconConfig = {
   MessageSquare: MessageSquare,
   Server: Server,
   Palette: Palette,
+  Building2: Building2,
 };
 
 // Service items moved outside component to prevent recreation on every render
 const serviceItemsConfig = [
   {
     title: "Web Applications",
-    description: "Build robust, scalable, and user-friendly web apps tailored to your business needs. From MVPs to full-scale platforms.",
+    description: "Build robust, scalable, and user-friendly web applications tailored to your business needs. We develop custom web solutions using modern frameworks like React, Next.js, and Node.js, creating everything from MVPs to full-scale enterprise platforms. Our web applications are optimized for performance, SEO, and user experience, ensuring your business has a strong digital presence.",
     iconName: "Globe",
     status: "Available",
     tags: ["React", "Next.js", "Full-Stack"],
@@ -219,13 +263,22 @@ const serviceItemsConfig = [
   },
   {
     title: "Mobile Applications",
-    description: "Bring your ideas to life with powerful mobile apps. We design and develop scalable iOS and Android applications.",
+    description: "Bring your ideas to life with powerful mobile applications. We design and develop scalable iOS and Android applications using Flutter, React Native, Swift, and Kotlin. From concept to App Store and Google Play Store publication, we handle the entire mobile app development lifecycle, ensuring your app delivers exceptional user experiences and meets platform guidelines.",
     iconName: "Smartphone",
     status: "Available",
     tags: ["iOS", "Android", "React Native"],
     category: "mobile",
     previewType: "placeholder",
     previewLabel: "Mobile App Preview",
+  },
+  {
+    title: "Custom ERP Systems",
+    description: "Build tailored Enterprise Resource Planning systems to streamline your business operations, manage resources, optimize workflows, and integrate with existing business processes. Our custom ERP solutions include modules for inventory management, accounting, human resources, customer relationship management, and supply chain management, all designed to scale with your business growth.",
+    iconName: "Building2",
+    status: "Available",
+    tags: ["ERP", "Enterprise", "Business Solutions"],
+    category: "erp",
+    previewType: "custom",
   },
   {
     title: "Aramco CCC Setup",
@@ -239,7 +292,7 @@ const serviceItemsConfig = [
   },
   {
     title: "Chatbot Development",
-    description: "We build custom AI chat solutions for instant support, streamlined processes, and a seamless audience experience.",
+    description: "We build custom AI-powered and rule-based chatbot solutions for instant customer support, streamlined business processes, and seamless user experiences. Our chatbots integrate with popular AI models like ChatGPT and Gemini, handle complex queries, process orders, provide product information, and escalate issues to human agents when needed. Perfect for 24/7 customer service and business automation.",
     iconName: "MessageSquare",
     status: "Live",
     tags: ["AI", "Chat", "Support"],
@@ -248,7 +301,7 @@ const serviceItemsConfig = [
   },
   {
     title: "System Setup & Architecture",
-    description: "Design and implement robust system architectures with scalable infrastructure and optimal performance configurations.",
+    description: "Design and implement robust system architectures with scalable infrastructure and optimal performance configurations. We provide cloud architecture design, security implementation, database configuration, deployment pipelines, and infrastructure setup for enterprise systems. Our solutions ensure high availability, disaster recovery, scalability, and compliance with enterprise security standards using AWS, Supabase, Firebase, and other cloud platforms.",
     iconName: "Server",
     status: "Available",
     tags: ["Architecture", "Infrastructure", "Scalability"],
@@ -258,7 +311,7 @@ const serviceItemsConfig = [
   },
   {
     title: "UI/UX",
-    description: "Create beautiful, intuitive user interfaces and exceptional user experiences that engage users and drive conversions.",
+    description: "Create beautiful, intuitive user interfaces and exceptional user experiences that engage users and drive conversions. We offer comprehensive UI/UX design services including user research, wireframes, prototyping, branding, design systems, and full visual design. Our designs are optimized for usability, accessibility, and conversion, ensuring your digital products provide exceptional user experiences across all devices and platforms.",
     iconName: "Palette",
     status: "Available",
     tags: ["Design", "User Experience", "Interface"],
@@ -304,6 +357,9 @@ const Services = () => {
             break;
           case "setup":
             preview = <AramcoSetupPreview />;
+            break;
+          case "erp":
+            preview = <ERPPreview />;
             break;
           default:
             preview = <PreviewPlaceholder label={item.previewLabel} />;

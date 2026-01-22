@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/navBar";
 import Footer from "@/components/Fotter";
-import { getOrganizationSchema, getWebsiteSchema } from "@/lib/seo";
+import { getOrganizationSchema, getWebsiteSchema, getLocalBusinessSchema } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
@@ -42,22 +42,37 @@ export const metadata = {
     default: "Tecway - Cutting-Edge Digital Solutions",
     template: "%s | Tecway",
   },
-  description: "Full-service tech agency specializing in web applications, mobile apps, AI chatbots, and custom software solutions. Transform your business with next-gen technology.",
+  description: "Full-service tech agency based in Khartoum, Sudan, specializing in web applications, mobile apps, custom ERP systems, AI chatbots, and custom software solutions. Transform your business with next-gen technology.",
   keywords: [
     "web development",
     "mobile app development",
     "AI chatbots",
     "custom software",
+    "ERP systems",
     "UI/UX design",
     "Flutter",
     "React",
     "Next.js",
     "digital solutions",
     "tech agency",
+    "Khartoum",
+    "Sudan",
+    "Khartoum tech agency",
+    "Sudan software development",
+    "Khartoum software development",
+    "ERP systems Khartoum",
+    "mobile app development Sudan",
+    "Flutter Khartoum",
+    "React development Sudan",
+    "custom ERP systems",
+    "enterprise solutions",
+    "business software Sudan",
   ],
   authors: [{ name: "Tecway" }],
   creator: "Tecway",
   publisher: "Tecway",
+  category: "Technology, Software Development, IT Services",
+  classification: "Technology Services",
   robots: {
     index: true,
     follow: true,
@@ -77,27 +92,38 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
+    alternateLocale: ["ar"],
     url: SITE_URL,
     siteName: "Tecway",
-    title: "Tecway - Cutting-Edge Digital Solutions",
-    description: "Full-service tech agency specializing in web applications, mobile apps, AI chatbots, and custom software solutions. Transform your business with next-gen technology.",
+    title: "Tecway - Cutting-Edge Digital Solutions | Khartoum, Sudan",
+    description: "Full-service tech agency based in Khartoum, Sudan, specializing in web applications, mobile apps, custom ERP systems, AI chatbots, and custom software solutions. Transform your business with next-gen technology.",
     images: [
       {
         url: `${SITE_URL}/Tecway.png`,
         width: 1200,
         height: 630,
-        alt: "Tecway - Cutting-Edge Digital Solutions",
+        alt: "Tecway - Cutting-Edge Digital Solutions in Khartoum, Sudan",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tecway - Cutting-Edge Digital Solutions",
-    description: "Full-service tech agency specializing in web applications, mobile apps, AI chatbots, and custom software solutions.",
+    title: "Tecway - Cutting-Edge Digital Solutions | Khartoum, Sudan",
+    description: "Full-service tech agency based in Khartoum, Sudan, specializing in web applications, mobile apps, custom ERP systems, AI chatbots, and custom software solutions.",
     images: [`${SITE_URL}/Tecway.png`],
   },
   alternates: {
     canonical: SITE_URL,
+    languages: {
+      "en": SITE_URL,
+      "ar": SITE_URL,
+    },
+  },
+  other: {
+    "geo.region": "SD-KH",
+    "geo.placename": "Khartoum",
+    "geo.position": "15.5007;32.5599",
+    "ICBM": "15.5007, 32.5599",
   },
   verification: {
     // Add verification codes when available
@@ -110,6 +136,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   const organizationSchema = getOrganizationSchema();
   const websiteSchema = getWebsiteSchema();
+  const localBusinessSchema = getLocalBusinessSchema();
 
   return (
     <html lang="en">
@@ -126,6 +153,11 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          suppressHydrationWarning
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
           suppressHydrationWarning
         />
         <NavBar />
