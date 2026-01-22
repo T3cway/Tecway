@@ -24,7 +24,7 @@ function createWelcomeEmailTemplate(customerName) {
           <!-- Header -->
           <tr>
             <td style="padding: 40px 40px 30px; text-align: center; background: linear-gradient(135deg, #0C0C0D 0%, #1a1a1a 100%);">
-              <h1 style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 300; letter-spacing: -0.5px;">Tecway</h1>
+              <h1 style="margin: 0; color: #ea580c; font-size: 32px; font-weight: 300; letter-spacing: -0.5px;">Tecway</h1>
             </td>
           </tr>
           
@@ -98,7 +98,7 @@ function createWelcomeEmailTemplate(customerName) {
                 <tr>
                   <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c;">
                     <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">⚙️ Enterprise Solutions</h4>
-                    <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Complete setup and configuration for enterprise infrastructure</p>
+                    <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Complete setup and configuration for enterprise infrastructure and custom software solutions</p>
                   </td>
                 </tr>
               </table>
@@ -113,7 +113,7 @@ function createWelcomeEmailTemplate(customerName) {
                 We're committed to providing exceptional service and support throughout your journey with us. If you have any urgent questions or need immediate assistance, please don't hesitate to reach out.
               </p>
               <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.6;">
-                <strong style="color: #ffffff;">Email:</strong> <a href="mailto:hello@tecway.com" style="color: #ea580c; text-decoration: none;">hello@tecway.com</a>
+                <strong style="color: #ffffff;">Email:</strong> <a href="mailto:m.abubaker@tecway.com" style="color: #ea580c; text-decoration: none;">m.abubaker@tecway.dev</a>
               </p>
             </td>
           </tr>
