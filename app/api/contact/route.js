@@ -8,6 +8,22 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 
 // Welcome email template
 function createWelcomeEmailTemplate(customerName) {
+  // Get site URL - API routes can't access NEXT_PUBLIC_ vars, so use regular env vars
+  // Priority: SITE_URL > VERCEL_URL > fallback
+  let siteUrl = process.env.SITE_URL;
+  
+  if (!siteUrl && process.env.VERCEL_URL) {
+    siteUrl = `https://${process.env.VERCEL_URL}`;
+  }
+  
+  if (!siteUrl) {
+    // Fallback - you should set SITE_URL in your environment variables
+    siteUrl = 'https://www.tecway.dev';
+  }
+  
+  // Ensure URL doesn't end with a slash
+  siteUrl = siteUrl.replace(/\/$/, '');
+  
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -51,54 +67,66 @@ function createWelcomeEmailTemplate(customerName) {
               
               <table role="presentation" style="width: 100%; border-collapse: collapse;">
                 <tr>
-                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c; margin-bottom: 10px;">
-                    <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">🌐 Web Applications</h4>
-                    <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Robust, scalable web apps from MVPs to full-scale platforms</p>
+                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c; margin-bottom: 10px; cursor: pointer;">
+                    <a href="${siteUrl}/projects?category=web" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
+                      <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">🌐 Web Applications →</h4>
+                      <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Robust, scalable web apps from MVPs to full-scale platforms</p>
+                    </a>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 10px 0;"></td>
                 </tr>
                 <tr>
-                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c;">
-                    <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">📱 Mobile Applications</h4>
-                    <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Powerful iOS and Android apps designed for scale</p>
+                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c; cursor: pointer;">
+                    <a href="${siteUrl}/projects?category=mobile" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
+                      <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">📱 Mobile Applications →</h4>
+                      <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Powerful iOS and Android apps designed for scale</p>
+                    </a>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 10px 0;"></td>
                 </tr>
                 <tr>
-                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c;">
-                    <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">💬 Chatbot Development</h4>
-                    <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Custom AI chat solutions for instant support and streamlined processes</p>
+                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c; cursor: pointer;">
+                    <a href="${siteUrl}/projects?category=chatbot" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
+                      <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">💬 Chatbot Development →</h4>
+                      <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Custom AI chat solutions for instant support and streamlined processes</p>
+                    </a>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 10px 0;"></td>
                 </tr>
                 <tr>
-                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c;">
-                    <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">🏗️ System Setup & Architecture</h4>
-                    <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Scalable infrastructure and optimal performance configurations</p>
+                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c; cursor: pointer;">
+                    <a href="${siteUrl}/projects?category=infrastructure" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
+                      <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">🏗️ System Setup & Architecture →</h4>
+                      <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Scalable infrastructure and optimal performance configurations</p>
+                    </a>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 10px 0;"></td>
                 </tr>
                 <tr>
-                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c;">
-                    <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">🎨 UI/UX Design</h4>
-                    <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Beautiful, intuitive interfaces that engage users and drive conversions</p>
+                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c; cursor: pointer;">
+                    <a href="${siteUrl}/projects?category=uiux" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
+                      <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">🎨 UI/UX Design →</h4>
+                      <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Beautiful, intuitive interfaces that engage users and drive conversions</p>
+                    </a>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 10px 0;"></td>
                 </tr>
                 <tr>
-                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c;">
-                    <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">⚙️ Enterprise Solutions</h4>
-                    <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Complete setup and configuration for enterprise infrastructure and custom software solutions</p>
+                  <td style="padding: 15px; background-color: #1a1a1a; border-left: 3px solid #ea580c; cursor: pointer;">
+                    <a href="${siteUrl}/projects?category=setup" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
+                      <h4 style="margin: 0 0 8px; color: #ffffff; font-size: 16px; font-weight: 500;">⚙️ Enterprise Solutions →</h4>
+                      <p style="margin: 0; color: #a0a0a0; font-size: 14px; line-height: 1.5;">Complete setup and configuration for enterprise infrastructure and custom software solutions</p>
+                    </a>
                   </td>
                 </tr>
               </table>
